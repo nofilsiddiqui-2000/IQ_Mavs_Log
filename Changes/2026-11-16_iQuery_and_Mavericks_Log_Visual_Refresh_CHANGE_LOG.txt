@@ -14,7 +14,7 @@ the exported copy. If a dev property differs from BEFORE, record the current
 value before replacing it.
 
 Current implementation and requested result
-The app has one screen with a fixed 700 × 650 canvas and Scale to fit on.
+The app has one screen with a fixed 700 × 650 canvas and App layout set to Fixed.
 The heading, field labels, and a save message use several names for the same
 counts. The heading, field labels, and recovery date input use Verdana.
 
@@ -36,7 +36,8 @@ screen can scroll down to the end of the form. The app fills the available
 Power Apps viewport, which may be bounded by the host if the app is embedded.
 
 Apply in the development app
-Follow the blocks in order. Paste formulas without an initial equals sign.
+Follow the blocks in order. Read the steps and explanation, then compare
+BEFORE and AFTER before pasting. Paste formulas without an initial equals sign.
 For a property on a locked data card, select the card in Tree view and use
 Advanced > Unlock to change properties. Keep the card and the existing input.
 Use the formula bar for layout changes so Studio does not rewrite the
@@ -46,107 +47,107 @@ formulas as fixed coordinates when you drag controls.
 ──────────────────────────────
 
 ==================== CHANGE 1 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: App-wide
 Studio Path: Settings > General
 Property: Name
 
-STEP 2 — BEFORE
-Daily PNQ & Wilbur Log
-
-STEP 3 — AFTER
-iQuery and Mavericks Log
-
-STEP 4 — APPLY THE CHANGE
 Open Settings > General. Replace Name with AFTER as plain text.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Sets the app display name shown in Power Apps.
+
+BEFORE
+Daily PNQ & Wilbur Log
+
+AFTER
+iQuery and Mavericks Log
 ==================== END CHANGE 1 ====================
 
 ==================== CHANGE 2 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: App-wide
 Studio Path: Settings > General
 Property: Description
 
-STEP 2 — BEFORE
-Daily PNQ and Mavs Logger app for CM Team members
-
-STEP 3 — AFTER
-Daily iQueries and Mavericks log for CM Team members.
-
-STEP 4 — APPLY THE CHANGE
 In Settings > General, replace Description with AFTER as plain text.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Updates the terminology in the app details.
+
+BEFORE
+Daily PNQ and Mavs Logger app for CM Team members
+
+AFTER
+Daily iQueries and Mavericks log for CM Team members.
 ==================== END CHANGE 2 ====================
 
 ==================== CHANGE 3 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > LblAppName3
 Property: Text
 
-STEP 2 — BEFORE
-"Daily PNQ / Mavericks Log"
-
-STEP 3 — AFTER
-"iQuery and Mavericks Log"
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Text. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Sets the heading shown in the app.
+
+BEFORE
+"Daily PNQ / Mavericks Log"
+
+AFTER
+"iQuery and Mavericks Log"
 ==================== END CHANGE 3 ====================
 
 ==================== CHANGE 4 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
 Property: DisplayName
 
-STEP 2 — BEFORE
-DataSourceInfo([@'Daily PNQ Log'],DataSourceInfo.DisplayName,'PNQs Completed')
-
-STEP 3 — AFTER
-"iQueries Completed"
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select DisplayName. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 DataCardKey10.Text and inpPNQ.Tooltip already read Parent.DisplayName. This updates both while keeping the existing SharePoint field binding.
+
+BEFORE
+DataSourceInfo([@'Daily PNQ Log'],DataSourceInfo.DisplayName,'PNQs Completed')
+
+AFTER
+"iQueries Completed"
 ==================== END CHANGE 4 ====================
 
 ==================== CHANGE 5 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
 Property: Text
 
-STEP 2 — BEFORE
-"Notifications (Mavericks) Completed"
-
-STEP 3 — AFTER
-"Mavericks Completed"
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Text. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Replaces the old Notifications wording. The input tooltip already reads Mavericks Completed through the card DisplayName.
+
+BEFORE
+"Notifications (Mavericks) Completed"
+
+AFTER
+"Mavericks Completed"
 ==================== END CHANGE 5 ====================
 
 ==================== CHANGE 6 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > IconAccept1
 Property: OnSelect
 
-STEP 2 — BEFORE
+Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select OnSelect. Replace the entire current formula with AFTER.
+
+WHAT THIS CHANGES
+Updates the recovery message wording. The threshold, exempt reasons, and form submission calls are identical to BEFORE.
+
+BEFORE
 // Calculate PNQs, Wilburs, Total
 Set(
     _pnq,
@@ -225,7 +226,7 @@ If(
     )
 )
 
-STEP 3 — AFTER
+AFTER
 // Calculate PNQs, Wilburs, Total
 Set(
     _pnq,
@@ -303,683 +304,650 @@ If(
         )
     )
 )
-
-STEP 4 — APPLY THE CHANGE
-Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select OnSelect. Replace the entire current formula with AFTER.
-
-STEP 5 — EXPLANATION
-Updates the recovery message wording. The threshold, exempt reasons, and form submission calls are identical to BEFORE.
 ==================== END CHANGE 6 ====================
 
 2. Fill the window with the existing screen
 ───────────────────────────────────────────
 
 ==================== CHANGE 7 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: App-wide
 Studio Path: Settings > Display
-Property: Scale to fit
+Property: App layout
 
-STEP 2 — BEFORE
-On
+1. Open Settings > Display in Power Apps Studio.
+2. Open App layout and select Responsive. Apply the setting if prompted.
+3. Close Settings and continue with Change 8. If Studio supplies new
+   default screen Width or Height formulas after the layout switch, use the
+   AFTER values in Changes 8 and 9.
 
-STEP 3 — AFTER
-Off
+WHAT THIS CHANGES
+Responsive lets the canvas follow the available viewport. Orientation,
+Lock aspect ratio, and Lock orientation may become unavailable when you
+select Responsive. Let Studio handle those settings. Leave Show mobile
+device notifications area Off. It controls the device's top notifications
+area on mobile.
 
-STEP 4 — APPLY THE CHANGE
-Open Settings > Display. Turn Scale to fit off, apply the setting if prompted, and close Settings. Then set the screen and control formulas below.
+BEFORE
+Fixed
 
-STEP 5 — EXPLANATION
-Lets App.Width and App.Height follow the available viewport. Power Apps turns Lock aspect ratio off when Scale to fit is off.
+AFTER
+Responsive
 ==================== END CHANGE 7 ====================
 
 ==================== CHANGE 8 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1
 Property: Width
 
-STEP 2 — BEFORE
-700
-
-STEP 3 — AFTER
-App.Width
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Uses the available viewport width. The existing background and header rectangle follow the screen width.
+
+BEFORE
+700
+
+AFTER
+App.Width
 ==================== END CHANGE 8 ====================
 
 ==================== CHANGE 9 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1
 Property: Height
 
-STEP 2 — BEFORE
-650
-
-STEP 3 — AFTER
-Max(App.Height, Form.Y + Form.Height)
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Height. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Fills tall windows and allows vertical scrolling when the window is shorter than the form and header.
+
+BEFORE
+650
+
+AFTER
+Max(App.Height, Form.Y + Form.Height)
 ==================== END CHANGE 9 ====================
 
 ==================== CHANGE 10 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > IconAccept1
 Property: X
 
-STEP 2 — BEFORE
-641
-
-STEP 3 — AFTER
-Parent.Width - Self.Width
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select X. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Keeps the save icon at the right edge of the header.
+
+BEFORE
+641
+
+AFTER
+Parent.Width - Self.Width
 ==================== END CHANGE 10 ====================
 
 ==================== CHANGE 11 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > LblAppName3
 Property: Width
 
-STEP 2 — BEFORE
-318
-
-STEP 3 — AFTER
-Min(318, Parent.Width)
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Keeps the title within the available width.
+
+BEFORE
+318
+
+AFTER
+Min(318, Parent.Width)
 ==================== END CHANGE 11 ====================
 
 ==================== CHANGE 12 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > LblAppName3
 Property: X
 
-STEP 2 — BEFORE
-191
-
-STEP 3 — AFTER
-(Parent.Width - Self.Width) / 2
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select X. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Centers the existing heading horizontally.
+
+BEFORE
+191
+
+AFTER
+(Parent.Width - Self.Width) / 2
 ==================== END CHANGE 12 ====================
 
 ==================== CHANGE 13 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > LblAppName3
 Property: Y
 
-STEP 2 — BEFORE
-0.00
-
-STEP 3 — AFTER
-If(Parent.Width < 660, Self.Height, 0)
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Y. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Moves the title below the toolbar on narrow windows so it clears the icons.
+
+BEFORE
+0.00
+
+AFTER
+If(Parent.Width < 660, Self.Height, 0)
 ==================== END CHANGE 13 ====================
 
 ==================== CHANGE 14 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > RectQuickActionBar3
 Property: Height
 
-STEP 2 — BEFORE
-49.58
-
-STEP 3 — AFTER
-LblAppName3.Y + LblAppName3.Height
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Height. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Extends the header background behind the title when it moves to a second row.
+
+BEFORE
+49.58
+
+AFTER
+LblAppName3.Y + LblAppName3.Height
 ==================== END CHANGE 14 ====================
 
 ==================== CHANGE 15 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form
 Property: Width
 
-STEP 2 — BEFORE
-700
-
-STEP 3 — AFTER
-Min(700, Parent.Width)
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Lets the form fit a narrow window and caps the width at its current 700.
+
+BEFORE
+700
+
+AFTER
+Min(700, Parent.Width)
 ==================== END CHANGE 15 ====================
 
 ==================== CHANGE 16 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form
 Property: X
 
-STEP 2 — BEFORE
-0
-
-STEP 3 — AFTER
-(Parent.Width - Self.Width) / 2
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select X. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Centers the form horizontally.
+
+BEFORE
+0
+
+AFTER
+(Parent.Width - Self.Width) / 2
 ==================== END CHANGE 16 ====================
 
 ==================== CHANGE 17 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form
 Property: Y
 
-STEP 2 — BEFORE
-49
-
-STEP 3 — AFTER
-RectQuickActionBar3.Height
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Y. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Starts the form immediately below the header at either height.
+
+BEFORE
+49
+
+AFTER
+RectQuickActionBar3.Height
 ==================== END CHANGE 17 ====================
 
 ==================== CHANGE 18 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Work Date_DataCard2
 Property: Width
 
-STEP 2 — BEFORE
-700
-
-STEP 3 — AFTER
-Parent.Width
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Sizes this card to its form. The cards keep their existing one-column order.
+
+BEFORE
+700
+
+AFTER
+Parent.Width
 ==================== END CHANGE 18 ====================
 
 ==================== CHANGE 19 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
 Property: Width
 
-STEP 2 — BEFORE
-700
-
-STEP 3 — AFTER
-Parent.Width
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Sizes this card to its form. The cards keep their existing one-column order.
+
+BEFORE
+700
+
+AFTER
+Parent.Width
 ==================== END CHANGE 19 ====================
 
 ==================== CHANGE 20 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2
 Property: Width
 
-STEP 2 — BEFORE
-700
-
-STEP 3 — AFTER
-Parent.Width
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Sizes this card to its form. The cards keep their existing one-column order.
+
+BEFORE
+700
+
+AFTER
+Parent.Width
 ==================== END CHANGE 20 ====================
 
 ==================== CHANGE 21 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2
 Property: Width
 
-STEP 2 — BEFORE
-700
-
-STEP 3 — AFTER
-Parent.Width
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Sizes this card to its form. The cards keep their existing one-column order.
+
+BEFORE
+700
+
+AFTER
+Parent.Width
 ==================== END CHANGE 21 ====================
 
 ==================== CHANGE 22 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2
 Property: Width
 
-STEP 2 — BEFORE
-700
-
-STEP 3 — AFTER
-Parent.Width
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Sizes this card to its form. The cards keep their existing one-column order.
+
+BEFORE
+700
+
+AFTER
+Parent.Width
 ==================== END CHANGE 22 ====================
 
 ==================== CHANGE 23 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2
 Property: Width
 
-STEP 2 — BEFORE
-700
-
-STEP 3 — AFTER
-Parent.Width
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Sizes this card to its form. The cards keep their existing one-column order.
+
+BEFORE
+700
+
+AFTER
+Parent.Width
 ==================== END CHANGE 23 ====================
 
 ==================== CHANGE 24 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Comments_DataCard2
 Property: Width
 
-STEP 2 — BEFORE
-700
-
-STEP 3 — AFTER
-Parent.Width
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Sizes this card to its form. The cards keep their existing one-column order.
+
+BEFORE
+700
+
+AFTER
+Parent.Width
 ==================== END CHANGE 24 ====================
 
 ==================== CHANGE 25 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Total Completed_DataCard2
 Property: Width
 
-STEP 2 — BEFORE
-700
-
-STEP 3 — AFTER
-Parent.Width
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Sizes this card to its form. The cards keep their existing one-column order.
+
+BEFORE
+700
+
+AFTER
+Parent.Width
 ==================== END CHANGE 25 ====================
 
 ==================== CHANGE 26 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardValue9
 Property: Width
 
-STEP 2 — BEFORE
-640
-
-STEP 3 — AFTER
-Parent.Width - 60
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Fits the input to the card with its existing 30-pixel left and right margins.
+
+BEFORE
+640
+
+AFTER
+Parent.Width - 60
 ==================== END CHANGE 26 ====================
 
 ==================== CHANGE 27 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > inpPNQ
 Property: Width
 
-STEP 2 — BEFORE
-640
-
-STEP 3 — AFTER
-Parent.Width - 60
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Fits the input to the card with its existing 30-pixel left and right margins.
+
+BEFORE
+640
+
+AFTER
+Parent.Width - 60
 ==================== END CHANGE 27 ====================
 
 ==================== CHANGE 28 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > inpWilbur
 Property: Width
 
-STEP 2 — BEFORE
-640
-
-STEP 3 — AFTER
-Parent.Width - 60
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Fits the input to the card with its existing 30-pixel left and right margins.
+
+BEFORE
+640
+
+AFTER
+Parent.Width - 60
 ==================== END CHANGE 28 ====================
 
 ==================== CHANGE 29 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > cmbReason
 Property: Width
 
-STEP 2 — BEFORE
-640
-
-STEP 3 — AFTER
-Parent.Width - 60
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Fits the input to the card with its existing 30-pixel left and right margins.
+
+BEFORE
+640
+
+AFTER
+Parent.Width - 60
 ==================== END CHANGE 29 ====================
 
 ==================== CHANGE 30 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDate
 Property: Width
 
-STEP 2 — BEFORE
-640
-
-STEP 3 — AFTER
-Parent.Width - 60
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Fits the input to the card with its existing 30-pixel left and right margins.
+
+BEFORE
+640
+
+AFTER
+Parent.Width - 60
 ==================== END CHANGE 30 ====================
 
 ==================== CHANGE 31 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > txtRecoveryQty
 Property: Width
 
-STEP 2 — BEFORE
-640
-
-STEP 3 — AFTER
-Parent.Width - 60
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Fits the input to the card with its existing 30-pixel left and right margins.
+
+BEFORE
+640
+
+AFTER
+Parent.Width - 60
 ==================== END CHANGE 31 ====================
 
 ==================== CHANGE 32 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Comments_DataCard2 > inpComments
 Property: Width
 
-STEP 2 — BEFORE
-640
-
-STEP 3 — AFTER
-Parent.Width - 60
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Width. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Fits the input to the card with its existing 30-pixel left and right margins.
+
+BEFORE
+640
+
+AFTER
+Parent.Width - 60
 ==================== END CHANGE 32 ====================
 
 3. Replace Verdana with Open Sans
 ─────────────────────────────────
 
 ==================== CHANGE 33 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > LblAppName3
 Property: Font
 
-STEP 2 — BEFORE
-Font.Verdana
-
-STEP 3 — AFTER
-Font.'Open Sans'
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Font. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Matches the font already used by the app’s classic text inputs. Keep the existing size and weight.
+
+BEFORE
+Font.Verdana
+
+AFTER
+Font.'Open Sans'
 ==================== END CHANGE 33 ====================
 
 ==================== CHANGE 34 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardKey9
 Property: Font
 
-STEP 2 — BEFORE
-Font.Verdana
-
-STEP 3 — AFTER
-Font.'Open Sans'
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Font. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Matches the font already used by the app’s classic text inputs. Keep the existing size and weight.
+
+BEFORE
+Font.Verdana
+
+AFTER
+Font.'Open Sans'
 ==================== END CHANGE 34 ====================
 
 ==================== CHANGE 35 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > DataCardKey10
 Property: Font
 
-STEP 2 — BEFORE
-Font.Verdana
-
-STEP 3 — AFTER
-Font.'Open Sans'
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Font. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Matches the font already used by the app’s classic text inputs. Keep the existing size and weight.
+
+BEFORE
+Font.Verdana
+
+AFTER
+Font.'Open Sans'
 ==================== END CHANGE 35 ====================
 
 ==================== CHANGE 36 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
 Property: Font
 
-STEP 2 — BEFORE
-Font.Verdana
-
-STEP 3 — AFTER
-Font.'Open Sans'
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Font. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Matches the font already used by the app’s classic text inputs. Keep the existing size and weight.
+
+BEFORE
+Font.Verdana
+
+AFTER
+Font.'Open Sans'
 ==================== END CHANGE 36 ====================
 
 ==================== CHANGE 37 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > DataCardKey14
 Property: Font
 
-STEP 2 — BEFORE
-Font.Verdana
-
-STEP 3 — AFTER
-Font.'Open Sans'
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Font. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Matches the font already used by the app’s classic text inputs. Keep the existing size and weight.
+
+BEFORE
+Font.Verdana
+
+AFTER
+Font.'Open Sans'
 ==================== END CHANGE 37 ====================
 
 ==================== CHANGE 38 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > DataCardKey12
 Property: Font
 
-STEP 2 — BEFORE
-Font.Verdana
-
-STEP 3 — AFTER
-Font.'Open Sans'
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Font. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Matches the font already used by the app’s classic text inputs. Keep the existing size and weight.
+
+BEFORE
+Font.Verdana
+
+AFTER
+Font.'Open Sans'
 ==================== END CHANGE 38 ====================
 
 ==================== CHANGE 39 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDate
 Property: Font
 
-STEP 2 — BEFORE
-Font.Verdana
-
-STEP 3 — AFTER
-Font.'Open Sans'
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Font. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Matches the font already used by the app’s classic text inputs. Keep the existing size and weight.
+
+BEFORE
+Font.Verdana
+
+AFTER
+Font.'Open Sans'
 ==================== END CHANGE 39 ====================
 
 ==================== CHANGE 40 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > DataCardKey13
 Property: Font
 
-STEP 2 — BEFORE
-Font.Verdana
-
-STEP 3 — AFTER
-Font.'Open Sans'
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Font. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Matches the font already used by the app’s classic text inputs. Keep the existing size and weight.
+
+BEFORE
+Font.Verdana
+
+AFTER
+Font.'Open Sans'
 ==================== END CHANGE 40 ====================
 
 ==================== CHANGE 41 ====================
-STEP 1 — LOCATE THE CONTROL OR SETTING
+STEPS
 Screen: EditScreen1
 Tree View Path: EditScreen1 > Form > Comments_DataCard2 > DataCardKey15
 Property: Font
 
-STEP 2 — BEFORE
-Font.Verdana
-
-STEP 3 — AFTER
-Font.'Open Sans'
-
-STEP 4 — APPLY THE CHANGE
 Open EditScreen1 in Power Apps Studio. Select the item at the Tree View Path above. In the property selector beside the formula bar, select Font. Replace the entire current formula with AFTER.
 
-STEP 5 — EXPLANATION
+WHAT THIS CHANGES
 Matches the font already used by the app’s classic text inputs. Keep the existing size and weight.
+
+BEFORE
+Font.Verdana
+
+AFTER
+Font.'Open Sans'
 ==================== END CHANGE 41 ====================
 
 TESTING IN DEV
@@ -1007,12 +975,13 @@ TESTING IN DEV
 
 ROLLBACK
 
-In dev, restore the exact BEFORE values and formulas for the items you
-applied. For the layout, restore the control and screen formulas first.
-Then restore Scale to fit and check that Lock aspect ratio is On, its
-exported state. Restore the app name and description as plain text. If a
-Studio property differed from BEFORE when you started, restore the value
-you recorded from Studio.
+In dev, restore the BEFORE values and formulas for the items you applied.
+For the layout, set App layout back to Fixed first. Confirm Landscape,
+Lock aspect ratio On, Lock orientation On, and Show mobile device
+notifications area Off, as reported before the change. Then restore the
+screen and control formulas. Restore the app name and description as
+plain text. If a Studio property differed from BEFORE when you started,
+restore the value you recorded from Studio.
 
 Verification
 The formulas were checked against the exported source. Run the steps above
