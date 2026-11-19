@@ -23,6 +23,9 @@ WHAT THE APP WILL LOOK LIKE
   large size as the original app.
 - The heading reads "iQuery and Mavericks Log". The labels read "iQueries
   Completed" and "Mavericks Completed". Labels use Open Sans.
+- The white panels behind the fields are lighter (60% instead of 85%
+  opaque), so the background shows through more. The input boxes stay
+  solid white.
 
 How it works
 - Scale to fit ON makes the player zoom the whole app to the window, so
@@ -75,13 +78,13 @@ Summary
  C. IconAccept1 ........................... X and OnSelect
  D. LblAppName3 ........................... Text, Font and X
  E. Form .................................. Height and X
- F. Work Date_DataCard2 ................... DataCardKey9 Font
- G. PNQs Completed_DataCard2 .............. DisplayName; DataCardKey10 Font
- H. Wilburs Completed_DataCard2 ........... DataCardKey11 Text and Font
- I. Reason Not Meeting Target_DataCard2 ... DataCardKey14 Font
- J. Recovery Date_DataCard2 ............... DataCardKey12 Font; dpRecoveryDate Font
- K. Recovery Quantity_DataCard2 ........... DataCardKey13 Font
- L. Comments_DataCard2 .................... DataCardKey15 Font
+ F. Work Date_DataCard2 ................... Fill; DataCardKey9 Font
+ G. PNQs Completed_DataCard2 .............. DisplayName and Fill; DataCardKey10 Font
+ H. Wilburs Completed_DataCard2 ........... Fill; DataCardKey11 Text and Font
+ I. Reason Not Meeting Target_DataCard2 ... Fill; DataCardKey14 Font
+ J. Recovery Date_DataCard2 ............... Fill; DataCardKey12 Font; dpRecoveryDate Font
+ K. Recovery Quantity_DataCard2 ........... Fill; DataCardKey13 Font
+ L. Comments_DataCard2 .................... Fill; DataCardKey15 Font
 
 ══════════════════════════════════════════════════════════════════════
 A. APP SETTINGS
@@ -417,7 +420,19 @@ E2. Tree View Path: EditScreen1 > Form
 F. Work Date_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-F1. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardKey9
+F1. Tree View Path: EditScreen1 > Form > Work Date_DataCard2
+    Property: Fill
+
+    BEFORE
+    RGBA(255, 255, 255, 0.85)
+
+    AFTER
+    RGBA(255, 255, 255, 0.6)
+
+    Why: A lighter white panel behind the label, so the background shows
+    through more. The input box keeps its solid white fill.
+
+F2. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardKey9
     Property: Font
 
     BEFORE
@@ -444,7 +459,19 @@ G1. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
 
     Why: Label and input tooltip read this, so both show "iQueries Completed". The SharePoint column (PNQsCompleted) is unchanged.
 
-G2. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > DataCardKey10
+G2. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
+    Property: Fill
+
+    BEFORE
+    RGBA(255, 255, 255, 0.85)
+
+    AFTER
+    RGBA(255, 255, 255, 0.6)
+
+    Why: A lighter white panel behind the label, so the background shows
+    through more. The input box keeps its solid white fill.
+
+G3. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > DataCardKey10
     Property: Font
 
     BEFORE
@@ -460,7 +487,19 @@ G2. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > DataCardKey1
 H. Wilburs Completed_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-H1. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
+H1. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2
+    Property: Fill
+
+    BEFORE
+    RGBA(255, 255, 255, 0.85)
+
+    AFTER
+    RGBA(255, 255, 255, 0.6)
+
+    Why: A lighter white panel behind the label, so the background shows
+    through more. The input box keeps its solid white fill.
+
+H2. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
     Property: Text
 
     BEFORE
@@ -471,7 +510,7 @@ H1. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardK
 
     Why: New label text.
 
-H2. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
+H3. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
     Property: Font
 
     BEFORE
@@ -487,7 +526,19 @@ H2. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardK
 I. Reason Not Meeting Target_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-I1. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > DataCardKey14
+I1. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2
+    Property: Fill
+
+    BEFORE
+    RGBA(255, 255, 255, 0.85)
+
+    AFTER
+    RGBA(255, 255, 255, 0.6)
+
+    Why: A lighter white panel behind the label, so the background shows
+    through more. The input box keeps its solid white fill.
+
+I2. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > DataCardKey14
     Property: Font
 
     BEFORE
@@ -503,7 +554,19 @@ I1. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > D
 J. Recovery Date_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-J1. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > DataCardKey12
+J1. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2
+    Property: Fill
+
+    BEFORE
+    RGBA(255, 255, 255, 0.85)
+
+    AFTER
+    RGBA(255, 255, 255, 0.6)
+
+    Why: A lighter white panel behind the label, so the background shows
+    through more. The input box keeps its solid white fill.
+
+J2. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > DataCardKey12
     Property: Font
 
     BEFORE
@@ -514,7 +577,7 @@ J1. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > DataCardKey12
 
     Why: Open Sans instead of Verdana.
 
-J2. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDate
+J3. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDate
     Property: Font
 
     BEFORE
@@ -530,7 +593,19 @@ J2. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDat
 K. Recovery Quantity_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-K1. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > DataCardKey13
+K1. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2
+    Property: Fill
+
+    BEFORE
+    RGBA(255, 255, 255, 0.85)
+
+    AFTER
+    RGBA(255, 255, 255, 0.6)
+
+    Why: A lighter white panel behind the label, so the background shows
+    through more. The input box keeps its solid white fill.
+
+K2. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > DataCardKey13
     Property: Font
 
     BEFORE
@@ -546,7 +621,19 @@ K1. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > DataCardK
 L. Comments_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-L1. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > DataCardKey15
+L1. Tree View Path: EditScreen1 > Form > Comments_DataCard2
+    Property: Fill
+
+    BEFORE
+    RGBA(255, 255, 255, 0.85)
+
+    AFTER
+    RGBA(255, 255, 255, 0.6)
+
+    Why: A lighter white panel behind the label, so the background shows
+    through more. The input box keeps its solid white fill.
+
+L2. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > DataCardKey15
     Property: Font
 
     BEFORE
@@ -576,6 +663,8 @@ TESTING IN DEV
    and the Recovery Date picker use Open Sans. The Work Date picker and
    the Reason dropdown keep their default font. Hover the iQueries input:
    its tooltip reads "iQueries Completed".
+   The panels behind the fields are lighter than before, the label text
+   is still easy to read, and the input boxes are solid white.
 4. Enter a total of 8 or more and press Save. Expected: "Entry submitted
    successfully." and one new row in the dev SharePoint list, with the
    counts in PNQsCompleted and WilbursCompleted.
