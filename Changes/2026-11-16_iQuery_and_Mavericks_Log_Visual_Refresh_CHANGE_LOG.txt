@@ -12,6 +12,10 @@ BEFORE = the original app, archived versions/Log_v1_20261116195316.zip
 below was read directly from that export.
 AFTER  = the final value to paste.
 This file replaces every earlier version of this change.
+Items C1 and C2 (IconAccept1 X and OnSelect) are superseded by
+2026-11-19_Header_Text_Buttons_CHANGE_LOG.txt. That record deletes
+IconAccept1; its X and OnSelect now live in btnSubmit. Run this record's
+tests while the icons still exist.
 
 
 WHAT THE APP WILL LOOK LIKE
@@ -680,8 +684,10 @@ TESTING IN DEV
 ══════════════════════════════════════════════════════════════════════
 ROLLBACK
 ══════════════════════════════════════════════════════════════════════
-1. If the duplicate-save record (2026-11-19_Prevent_Duplicate_Saves) is
-   applied, roll it back first.
+1. If the duplicate-save and/or header buttons records are applied, roll
+   them back first, in reverse order (duplicate-save, then header
+   buttons). Once the icons are deleted, skip C1 and C2; they come back
+   only with the icons.
 2. Set Lock aspect ratio back On (A3). Do this first, because changing the
    Display settings can rewrite the screen Width and Height.
 3. Paste the BEFORE values of B1 and B2, then of every other item.

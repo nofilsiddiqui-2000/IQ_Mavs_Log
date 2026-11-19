@@ -1,6 +1,6 @@
 iQuery and Mavericks Log
 Power Apps Studio | Before and after
-November 19, 2026 | PENDING TEST — Not yet tested in dev.
+November 19, 2026 (revised for the header buttons) | PENDING TEST — Not yet tested in dev.
 
 Change title
 Prevent duplicate saves (double-click and same-day entries).
@@ -9,23 +9,21 @@ Change type
 Bug fix (data quality).
 
 Source and order
-- Apply this record SECOND. First apply
-  2026-11-16_iQuery_and_Mavericks_Log_Visual_Refresh_CHANGE_LOG.txt to the
-  original app.
-- BEFORE = the original app (archived versions/Log_v1_20261116195316.zip)
-  after that visual refresh record.
-- Every BEFORE below is identical in the original app, with one
-  exception: IconAccept1.OnSelect. Its BEFORE is the visual refresh
-  AFTER (item C2 there), which only changes the recovery message to
-  "iQueries and Mavericks".
-- Both records touch IconAccept1. The visual refresh changes X and
-  OnSelect; this record changes OnSelect, DisplayMode and DisabledColor.
+- Apply this record THIRD, on the original app
+  (archived versions/Log_v1_20261116195316.zip):
+  1. 2026-11-16_iQuery_and_Mavericks_Log_Visual_Refresh_CHANGE_LOG.txt
+  2. 2026-11-19_Header_Text_Buttons_CHANGE_LOG.txt
+  3. this record
+- BEFORE = the app after those two records.
+- Section A changes btnSubmit, the Submit button created by the header
+  buttons record. Its BEFORE values are the ones that record sets.
+- Section B (Form) BEFORE values are identical in the original app.
 
 
 PROBLEM
 ───────
-1. Double save: the save icon (IconAccept1) stays active while the form
-   is saving. A double-click can create two identical rows in SharePoint.
+1. Double save: the Submit button (btnSubmit) stays active while the
+   form is saving. A double-click can create two identical rows in SharePoint.
 2. Same day twice: nothing stops an employee from logging the same Work
    Date twice. Every save creates a new row, because the form is always in
    New mode (DefaultMode: FormMode.New, Item: Defaults('Daily PNQ Log')).
@@ -33,12 +31,13 @@ PROBLEM
 
 WHAT CHANGES
 ────────────
-- A new variable, _isSaving, greys out the save icon from the moment the
-  employee presses Save until SharePoint answers.
+- A new variable, _isSaving, disables the Submit button and changes its
+  text to "Saving..." from the moment the employee presses Submit until
+  SharePoint answers.
 - Before saving, the app looks for a row created by the same person for
   the same Work Date. If one exists, it shows a warning and does not save.
-  The employee can still edit that row in the SharePoint list (database
-  icon), as today.
+  The employee can still edit that row in the SharePoint list (the
+  SharePoint List button), as today.
 - If the duplicate lookup itself fails (for example the network drops),
   the app does not block the employee. It goes on to save, as it does
   today.
@@ -82,13 +81,16 @@ IMPACT ANALYSIS
 - _isSaving is set back to false in each of these cases:
   - Form.OnSuccess (saved)
   - Form.OnFailure (SharePoint rejected the save)
-  - Form.OnReset (new; this runs on ResetForm, so the reload icon unlocks
-    the save icon too)
+  - Form.OnReset (new; this runs on ResetForm, so the Clear button
+    unlocks Submit too)
   - a duplicate was found
   - closing and reopening the app
-- Visual: the busy icon is drawn at 35% opacity. Only the save glyph
-  fades; the yellow background behind it stays.
-- Links: the database icon opens the "Daily PNQ Log Prod" list. Confirm
+- Visual: while busy, Submit shows "Saving..." in the classic button's
+  default disabled (greyed) colours.
+- Classic buttons already grey out briefly while their OnSelect runs.
+  That covers the duplicate lookup but not the save itself, so _isSaving
+  is still needed.
+- Links: the SharePoint List button opens the "Daily PNQ Log Prod" list. Confirm
   that is the same list the dev app writes to, so testers look in the right
   place.
 
@@ -104,16 +106,16 @@ that the other items use. Paste formulas without an initial equals sign.
    change, and it does not change any data.
 
 ══════════════════════════════════════════════════════════════════════
-A. IconAccept1 (save icon)
+A. btnSubmit (Submit button)
 ══════════════════════════════════════════════════════════════════════
-Tree View Path: EditScreen1 > IconAccept1
-Select IconAccept1, then do A1, A2 and A3.
+Tree View Path: EditScreen1 > btnSubmit
+Select btnSubmit, then do A1, A2 and A3.
 
 A1. Property: OnSelect
 
     What changed: only the innermost "Form.Valid" branch. Instead of
     calling SubmitForm(Form) straight away, it now:
-    1. Sets _isSaving to true, which greys out the icon.
+    1. Sets _isSaving to true, which disables Submit.
     2. Looks for an existing row by the same user for the same Work Date.
     3. If none exists (or the lookup fails), it submits the form.
        Otherwise it sets _isSaving back to false and shows a warning.
@@ -268,7 +270,7 @@ If(
         ),
         If(
             Form.Valid,
-            // Lock the save icon, then block a second entry for the same day
+            // Lock the Submit button, then block a second entry for the same day
             Set(_isSaving, true);
             If(
                 IfError(
@@ -285,7 +287,7 @@ If(
                 SubmitForm(Form),
                 Set(_isSaving, false);
                 Notify(
-                    "You already have an entry for " & Text(DataCardValue9.SelectedDate, "mmm d, yyyy") & ". To change it, open the SharePoint list with the database icon.",
+                    "You already have an entry for " & Text(DataCardValue9.SelectedDate, "mmm d, yyyy") & ". To change it, open the SharePoint list with the SharePoint List button.",
                     NotificationType.Warning
                 )
             ),
@@ -310,26 +312,25 @@ A2. Property: DisplayMode
     BEFORE
 DisplayMode.Edit
 
-    (Not written in the .pa.yaml because it is the default. Controls/4.json
-    confirms DisplayMode.Edit.)
+    (The default for a new button; the header buttons record does not
+    set it.)
 
     AFTER
 If(_isSaving, DisplayMode.Disabled, DisplayMode.Edit)
 
-    Why: while a save is in progress, the icon cannot be pressed again.
-    Before the first save _isSaving is blank, which counts as false, so the
-    icon is active when the app opens.
+    Why: while a save is in progress, Submit cannot be pressed again.
+    Before the first save _isSaving is blank, which counts as false, so
+    Submit is active when the app opens.
 
-A3. Property: DisabledColor
+A3. Property: Text
 
     BEFORE
-RGBA(0, 0, 0, 1)
+"Submit"
 
     AFTER
-RGBA(0, 0, 0, 0.35)
+If(_isSaving, "Saving...", "Submit")
 
-    Why: today DisabledColor is the same black as Color, so a disabled icon
-    would look active. At 35% opacity the employee can see it is busy.
+    Why: tells the employee the save is in progress.
 
 
 ══════════════════════════════════════════════════════════════════════
@@ -376,7 +377,7 @@ Notify(
     NotificationType.Error
 )
 
-    Why (B1 and B2): unlock the save icon once SharePoint answers. The
+    Why (B1 and B2): unlock Submit once SharePoint answers. The
     messages and the form reset are unchanged.
 
 B3. Property: OnReset
@@ -387,9 +388,9 @@ B3. Property: OnReset
     AFTER
 Set(_isSaving, false)
 
-    Why: ResetForm(Form) runs this. Both the reload icon (IconCancel1) and
-    OnSuccess call ResetForm, so the reload icon is a manual way to unlock
-    the save icon in any unexpected case.
+    Why: ResetForm(Form) runs this. Both the Clear button (btnClear) and
+    OnSuccess call ResetForm, so Clear is a manual way to unlock Submit in
+    any unexpected case.
 
 
 TESTING IN DEV
@@ -398,40 +399,40 @@ Before you start: in the dev SharePoint list, delete (or note) any rows you
 created for today and for the two test dates you plan to use.
 
 Primary
-1. Today's Work Date, enter 8 + 0, press Save. Expected: success message,
+1. Today's Work Date, enter 8 + 0, press Submit. Expected: success message,
    form resets, one new row in the dev list.
-2. Without changing the date, enter 8 + 0 again and press Save.
+2. Without changing the date, enter 8 + 0 again and press Submit.
    Expected: warning "You already have an entry for <today>..." and no new
-   row. The save icon is active again right after the warning. If no
+   row. Submit is active again right after the warning. If no
    warning appears, use the Fallback under A1.
 3. Change Work Date to a day you have not logged, enter 8 + 0, and click
-   Save quickly two or three times. Expected: the save glyph fades after
-   the first click, and only one row is created.
-4. Pick the date from test 3 again and press Save. Expected: the duplicate
+   Submit quickly two or three times. Expected: Submit greys out and shows
+   "Saving..." after the first click, and only one row is created.
+4. Pick the date from test 3 again and press Submit. Expected: the duplicate
    warning. If no warning appears although the row exists, use the
    Fallback under A1.
 
 Regression
 5. Total below 8 with no reason: "please select a reason" message, no row,
-   save icon stays active.
+   Submit stays active.
 6. Total below 8, non-exempt reason, Recovery Date empty: the recovery
    message, no row.
 7. Total below 8 with an exempt reason (Sick, Vacation, Training (Consta),
    New Employee Training, Project) and no recovery details, on a new date:
    saves.
-8. Reload icon (IconCancel1) clears the form. Database and dashboard icons
-   still open their links.
+8. Clear resets the form. SharePoint List and Dashboard still open their
+   links.
 9. SharePoint rejection: in the dev list settings, temporarily make
    Comments required (the app card stays optional). Save with Comments
    empty on a new date. Do not refresh the data source in Studio during
    this test. Expected: the SharePoint error message (from OnFailure), no
-   row, and the save icon becomes active again. Then set Comments back to
+   row, and Submit becomes active again. Then set Comments back to
    optional.
 
 Edge cases
-10. Network off: turn off Wi-Fi and press Save on a new date. Expected:
-    an error appears. If the save icon stays grey, press the reload icon:
-    it must become active again.
+10. Network off: turn off Wi-Fi and press Submit on a new date. Expected:
+    an error appears. If Submit stays grey, press Clear: Submit must
+    become active again.
 11. If the duplicate warning never appears for anyone, User().Email may
     differ from the SharePoint account email in your tenant. Tell me what
     the Created By column shows for your rows.

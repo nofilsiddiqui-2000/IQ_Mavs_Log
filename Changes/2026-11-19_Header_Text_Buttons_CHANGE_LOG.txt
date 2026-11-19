@@ -1,0 +1,387 @@
+iQuery and Mavericks Log
+Power Apps Studio | Before and after
+November 19, 2026 | PENDING TEST — Not yet tested in dev.
+
+Change title
+Replace the four header icons with labelled buttons.
+
+Change type
+UI improvement.
+
+Source and order
+- BEFORE = the original app (archived versions/Log_v1_20261116195316.zip)
+  with 2026-11-16_iQuery_and_Mavericks_Log_Visual_Refresh_CHANGE_LOG.txt
+  applied.
+- Apply this record SECOND, after the visual refresh and before
+  2026-11-19_Prevent_Duplicate_Saves_CHANGE_LOG.txt. The duplicate-save
+  record targets the new Submit button created here.
+
+
+PROBLEM
+───────
+The header has four icons with no text: reload, database, newspaper and
+save. Their purpose only shows in a tooltip on hover, so users have to
+guess.
+
+
+WHAT CHANGES
+────────────
+Four classic buttons replace the four icons. Each button runs exactly the
+same formula as the icon it replaces.
+
+  Old icon       New button        Action (unchanged)
+  ───────────    ───────────────   ──────────────────────────────────────
+  IconCancel1    btnClear          Clears the form
+  Icon2          btnSharePoint     Opens the SharePoint list of entries
+  Icon2_1        btnDashboard      Opens the Power BI Productivity Dashboard
+  IconAccept1    btnSubmit         Validates and saves the entry
+
+Layout on the yellow header (49.58 high):
+- Clear, SharePoint List and Dashboard sit on the left, from X 10 to 366.
+- The heading stays centered. On the narrowest canvas (1136 wide) it runs
+  from 409 to 727, so it never overlaps the buttons.
+- Submit sits at the right edge, 10 pixels in. It is dark blue with white
+  text, so it stands out as the main action.
+- The other three are white with dark-blue text and a dark-blue border.
+- All buttons use Open Sans 11 semibold, to match the form labels.
+
+Unchanged
+- What each action does, the SharePoint save logic, the links, the form,
+  the heading and the header bar.
+
+
+IMPACT ANALYSIS
+───────────────
+- References: no formula anywhere in the app refers to IconCancel1, Icon2,
+  Icon2_1 or IconAccept1. Deleting them breaks nothing.
+- Save logic: btnSubmit.OnSelect is copied character for character from
+  IconAccept1.OnSelect (the visual refresh version). Validation, the
+  recovery rules and SubmitForm behave exactly as before.
+- Duplicate-save record: it now targets btnSubmit instead of IconAccept1.
+  Apply it after this record.
+- Visual refresh record: its items C1 and C2 (IconAccept1 X and OnSelect)
+  no longer apply once IconAccept1 is deleted. Their values live on in
+  btnSubmit.
+- Keyboard and accessibility: Icon2 and Icon2_1 could not be reached by
+  keyboard and had no accessible label. Their replacements can (a classic
+  button's TabIndex defaults to 0) and screen readers read the button
+  text.
+- Classic buttons briefly grey out while their OnSelect runs
+  (AutoDisableOnSelect, on by default). This is normal.
+
+
+EXACT IMPLEMENTATION STEPS
+──────────────────────────
+0. Before you start: save the app with version notes "Before header
+   buttons". The rollback restores this version.
+
+Paste formulas without an initial equals sign. Type all values in the
+formula bar.
+
+OnSelect: copy each formula from the live icon instead of retyping it.
+Select the icon > OnSelect > click in the formula bar > Ctrl+A, Ctrl+C.
+Then select the button > OnSelect > Ctrl+A, Ctrl+V. The printed formula
+below is the reference to compare against.
+
+Tip: build btnClear completely first. Then copy it (Ctrl+C) and paste it
+(Ctrl+V) three times. Each copy keeps all the styling, so for the copies
+you only change the few properties listed.
+
+══════════════════════════════════════════════════════════════════════
+A. btnClear (replaces IconCancel1)
+══════════════════════════════════════════════════════════════════════
+NEW CONTROL — NO EXISTING FORMULA
+
+1. In Tree view, select EditScreen1 itself, not the Form. If the Form or a
+   card is selected, the button is inserted inside the form.
+2. Insert > Classic > Button. (In some Studio versions: Insert > Input >
+   Button (classic).) Do not use the modern Button.
+   Check: the property dropdown (top left) must contain HoverFill. If it
+   does not, you inserted the modern button. Delete it and insert the
+   classic one.
+3. Rename it btnClear: double-click the name in Tree view.
+4. Set these properties:
+
+    Text
+"Clear"
+
+    OnSelect   (copied from IconCancel1.OnSelect)
+ResetForm(Form);Back()
+
+    Tooltip
+"Clear the form and start again"
+
+    X
+10
+
+    Y
+8
+
+    Width
+90
+
+    Height
+34
+
+    Fill
+RGBA(255, 255, 255, 1)
+
+    Color
+RGBA(0, 18, 107, 1)
+
+    BorderColor
+RGBA(0, 18, 107, 1)
+
+    BorderThickness
+1
+
+    HoverFill
+ColorFade(Self.Fill, -10%)
+
+    HoverColor
+Self.Color
+
+    HoverBorderColor
+Self.BorderColor
+
+    PressedFill
+ColorFade(Self.Fill, -20%)
+
+    PressedColor
+Self.Color
+
+    PressedBorderColor
+Self.BorderColor
+
+    Font
+Font.'Open Sans'
+
+    Size
+11
+
+    FontWeight
+FontWeight.Semibold
+
+    Why: the hover and pressed formulas use the button's own colours, so
+    every copy keeps matching hover and pressed shades automatically.
+
+══════════════════════════════════════════════════════════════════════
+B. btnSharePoint (replaces Icon2)
+══════════════════════════════════════════════════════════════════════
+NEW CONTROL — NO EXISTING FORMULA
+
+1. Select btnClear, press Ctrl+C, then select EditScreen1 and press
+   Ctrl+V.
+2. Rename the copy btnSharePoint.
+3. Change only these properties (everything else stays as copied):
+
+    Text
+"SharePoint List"
+
+    OnSelect   (copied from Icon2.OnSelect)
+Launch("https://bombardierinc.sharepoint.com/sites/TeamCM/Lists/Daily%20PNQ%20Log%20Prod/Employee%20%20All%20Entries.aspx")
+
+    Tooltip
+"Open all entries in the SharePoint list"
+
+    X
+108
+
+    Y
+8
+
+    Width
+140
+
+    Check that Height still reads 34.
+
+══════════════════════════════════════════════════════════════════════
+C. btnDashboard (replaces Icon2_1)
+══════════════════════════════════════════════════════════════════════
+NEW CONTROL — NO EXISTING FORMULA
+
+1. Paste another copy of btnClear on EditScreen1 and rename it
+   btnDashboard.
+2. Change only these properties:
+
+    Text
+"Dashboard"
+
+    OnSelect   (copied from Icon2_1.OnSelect)
+Launch("https://app.powerbi.com/Redirect?action=OpenReport&appId=bc95df62-1716-4d85-9c8c-e7e27c769bd1&reportObjectId=afe7f419-2d97-4371-899e-2795620772c2&ctid=b0f3630d-e5de-4172-b492-0cf5cd387a41&reportPage=f25166057a9959fb5db5&pbi_source=appShareLink&portalSessionId=1596cedd-b7f6-4007-8bf7-f8f16117a33a")
+
+    Tooltip
+"Open the Productivity Dashboard in Power BI"
+
+    X
+256
+
+    Y
+8
+
+    Width
+110
+
+    Check that Height still reads 34.
+
+══════════════════════════════════════════════════════════════════════
+D. btnSubmit (replaces IconAccept1)
+══════════════════════════════════════════════════════════════════════
+NEW CONTROL — NO EXISTING FORMULA
+
+1. Paste another copy of btnClear on EditScreen1 and rename it btnSubmit.
+2. Change only these properties:
+
+    Text
+"Submit"
+
+    Tooltip
+"Save this entry"
+
+    X
+Parent.Width - Self.Width - 10
+
+    Y
+8
+
+    Width
+110
+
+    Fill
+RGBA(0, 18, 107, 1)
+
+    Color
+RGBA(255, 255, 255, 1)
+
+    HoverFill
+ColorFade(Self.Fill, 20%)
+
+    Check that Height still reads 34.
+
+    OnSelect   (copied character for character from IconAccept1.OnSelect)
+// Calculate PNQs, Wilburs, Total
+Set(
+    _pnq,
+    If(
+        IsBlank(inpPNQ.Text),
+        0,
+        Value(inpPNQ.Text)
+    )
+);
+Set(
+    _wil,
+    If(
+        IsBlank(inpWilbur.Text),
+        0,
+        Value(inpWilbur.Text)
+    )
+);
+Set(_total, _pnq + _wil);
+
+// Read the selected reason
+Set(
+    _reasonVal,
+    If(
+        IsBlank(cmbReason.Selected),
+        "",
+        cmbReason.Selected.Value
+    )
+);
+
+// If below 8 and NO reason at all, ask user to enter a reason
+If(
+    _total < 8 && _reasonVal = "",
+    Notify(
+        "Because you are below the daily target, please select a reason.",
+        NotificationType.Error
+    ),
+
+    // Determine if we actually need a recovery plan
+    Set(
+        _needsRecovery,
+        _total < 8 &&
+        !(
+            _reasonVal = "Sick" ||
+            _reasonVal = "Vacation" ||
+            _reasonVal = "Training (Consta)" ||
+            _reasonVal = "New Employee Training" ||
+            _reasonVal = "Project"        // ← NEW BYPASS REASON
+        )
+    );
+
+    // Check if recovery info is missing
+    Set(
+        _missingRecovery,
+        _needsRecovery &&
+        (
+            IsBlank(dpRecoveryDate.SelectedDate) ||
+            Value(txtRecoveryQty.Text) < 1
+        )
+    );
+
+    // Decide: show error or submit 
+    If(
+        _missingRecovery,
+        Notify(
+            "Because your iQueries and Mavericks are below 8 and the reason is not Sick, Vacation, Training (Consta), New Employee Training, or Project, please enter a Recovery Date and Quantity.",
+            NotificationType.Error
+        ),
+        If(
+            Form.Valid,
+            SubmitForm(Form),
+            Notify(
+                "Please complete the highlighted required fields.",
+                NotificationType.Error
+            )
+        )
+    )
+)
+
+    Why: dark blue with white text marks Submit as the main action. The X
+    formula keeps it at the right edge on any window width. Darkening is
+    hard to see on dark blue, so Submit lightens on hover instead. The
+    pressed shade follows the new Fill automatically.
+
+══════════════════════════════════════════════════════════════════════
+E. Remove the old icons
+══════════════════════════════════════════════════════════════════════
+Do this only after testing steps 1 to 5 below pass.
+
+In Tree view, select each of these, then press Delete:
+  IconCancel1, Icon2, Icon2_1, IconAccept1
+
+Studio shows no errors afterwards, because nothing refers to them.
+
+
+TESTING IN DEV
+──────────────
+Test before step E (icons still present) and again after it.
+1. F5. Expected: four text buttons on the yellow header: Clear,
+   SharePoint List and Dashboard on the left, Submit on the right. The
+   heading stays centered and nothing overlaps. Resize the window: the
+   buttons stay in place and Submit stays at the right edge.
+2. Hover each button. Expected: its tooltip shows. Clear, SharePoint List
+   and Dashboard darken slightly; Submit turns a lighter blue.
+3. Type something in the form, then press Clear. Expected: the form
+   resets.
+4. Press SharePoint List and Dashboard. Expected: the same pages open as
+   with the old icons.
+5. Press Submit:
+   - With a total of 8 or more: "Entry submitted successfully." and one
+     new row.
+   - Below 8 with no reason: the reason message.
+   - Below 8 with a non-exempt reason and no recovery details: the
+     recovery message.
+6. After step E: repeat steps 1 to 5. Then click an empty area of the
+   background and press Tab repeatedly. Expected order: Clear, SharePoint
+   List, Dashboard, Submit, then the form fields.
+
+
+ROLLBACK
+────────
+1. If the duplicate-save record is applied, roll it back first.
+2. Before step E: delete the four buttons. The icons still work.
+3. After step E: in make.powerapps.com, go to Apps > this app > ... >
+   Details > Versions, and restore the "Before header buttons" version.
+   This also undoes anything applied after that version, including the
+   duplicate-save record.
