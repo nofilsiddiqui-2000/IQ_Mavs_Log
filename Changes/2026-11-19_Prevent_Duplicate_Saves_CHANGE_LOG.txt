@@ -1,0 +1,444 @@
+iQuery and Mavericks Log
+Power Apps Studio | Before and after
+November 19, 2026 | PENDING TEST — Not yet tested in dev.
+
+Change title
+Prevent duplicate saves (double-click and same-day entries).
+
+Change type
+Bug fix (data quality).
+
+Source and order
+- Apply this record SECOND. First apply
+  2026-11-16_iQuery_and_Mavericks_Log_Visual_Refresh_CHANGE_LOG.txt to the
+  original app.
+- BEFORE = the original app (archived versions/Log_v1_20261116195316.zip)
+  after that visual refresh record.
+- Every BEFORE below is identical in the original app, with one
+  exception: IconAccept1.OnSelect. Its BEFORE is the visual refresh
+  AFTER (item D2 there), which only changes the recovery message to
+  "iQueries and Mavericks".
+- Both records touch IconAccept1. The visual refresh changes X and
+  OnSelect; this record changes OnSelect, DisplayMode and DisabledColor.
+
+
+PROBLEM
+───────
+1. Double save: the save icon (IconAccept1) stays active while the form
+   is saving. A double-click can create two identical rows in SharePoint.
+2. Same day twice: nothing stops an employee from logging the same Work
+   Date twice. Every save creates a new row, because the form is always in
+   New mode (DefaultMode: FormMode.New, Item: Defaults('Daily PNQ Log')).
+
+
+WHAT CHANGES
+────────────
+- A new variable, _isSaving, greys out the save icon from the moment the
+  employee presses Save until SharePoint answers.
+- Before saving, the app looks for a row created by the same person for
+  the same Work Date. If one exists, it shows a warning and does not save.
+  The employee can still edit that row in the SharePoint list (database
+  icon), as today.
+- If the duplicate lookup itself fails (for example the network drops),
+  the app does not block the employee. It goes on to save, as it does
+  today.
+
+Unchanged
+- The target of 8, the exempt reasons, the reason and recovery messages,
+  and the required fields.
+- All SharePoint columns and DataField/Update bindings.
+- The success and error messages.
+
+
+CORRECTION TO EARLIER ADVICE
+────────────────────────────
+Earlier I said the Recovery Date picker defaults to today, so the recovery
+check could not trigger. That was wrong. The full control definition
+(Controls/4.json) shows dpRecoveryDate.SelectedDate is empty, so the picker
+already starts blank and the recovery check works.
+
+The card's Default: Today() is not read by anything. It is harmless, so
+this record does not change it.
+
+
+IMPACT ANALYSIS
+───────────────
+- Duplicate lookup, delegation: it uses the SharePoint columns Created By
+  (Author) and Work Date (WorkDate, date only). Both support equality
+  filters, so SharePoint does the search. It checks the whole list, not
+  only the first 500 rows. It returns only the ID, so it adds one small
+  query per save.
+- Duplicate lookup, list size: once a SharePoint list has more than
+  5,000 items, SharePoint rejects filters on columns that are not indexed.
+  The lookup then fails, IfError lets the save through, and duplicates are
+  no longer blocked (no error is shown). Index both columns (step 0 below)
+  to prevent this.
+- Duplicate lookup, which rows it catches:
+  - It compares User().Email with the Created By email. In most tenants
+    these match. If they don't, the check never finds a duplicate, which
+    is the same as today.
+  - Rows created by another person, or directly in SharePoint by another
+    account, are not detected.
+- _isSaving is set back to false in each of these cases:
+  - Form.OnSuccess (saved)
+  - Form.OnFailure (SharePoint rejected the save)
+  - Form.OnReset (new; this runs on ResetForm, so the reload icon unlocks
+    the save icon too)
+  - a duplicate was found
+  - closing and reopening the app
+- Visual: the busy icon is drawn at 35% opacity. Only the save glyph
+  fades; the yellow background behind it stays.
+- Links: the database icon opens the "Daily PNQ Log Prod" list. Confirm
+  that is the same list the dev app writes to, so testers look in the right
+  place.
+
+
+EXACT IMPLEMENTATION STEPS
+──────────────────────────
+Grouped by control. Do A1 first, because it creates the _isSaving variable
+that the other items use. Paste formulas without an initial equals sign.
+
+0. SharePoint (dev and prod lists): open the list > Settings (gear) > List
+   settings > Indexed columns > Create a new index. Create one index on
+   Work Date and one on Created By. This is a list setting, not an app
+   change, and it does not change any data.
+
+══════════════════════════════════════════════════════════════════════
+A. IconAccept1 (save icon)
+══════════════════════════════════════════════════════════════════════
+Tree View Path: EditScreen1 > IconAccept1
+Select IconAccept1, then do A1, A2 and A3.
+
+A1. Property: OnSelect
+
+    What changed: only the innermost "Form.Valid" branch. Instead of
+    calling SubmitForm(Form) straight away, it now:
+    1. Sets _isSaving to true, which greys out the icon.
+    2. Looks for an existing row by the same user for the same Work Date.
+    3. If none exists (or the lookup fails), it submits the form.
+       Otherwise it sets _isSaving back to false and shows a warning.
+    Everything above that branch is identical, character for character.
+
+    BEFORE
+// Calculate PNQs, Wilburs, Total
+Set(
+    _pnq,
+    If(
+        IsBlank(inpPNQ.Text),
+        0,
+        Value(inpPNQ.Text)
+    )
+);
+Set(
+    _wil,
+    If(
+        IsBlank(inpWilbur.Text),
+        0,
+        Value(inpWilbur.Text)
+    )
+);
+Set(_total, _pnq + _wil);
+
+// Read the selected reason
+Set(
+    _reasonVal,
+    If(
+        IsBlank(cmbReason.Selected),
+        "",
+        cmbReason.Selected.Value
+    )
+);
+
+// If below 8 and NO reason at all, ask user to enter a reason
+If(
+    _total < 8 && _reasonVal = "",
+    Notify(
+        "Because you are below the daily target, please select a reason.",
+        NotificationType.Error
+    ),
+
+    // Determine if we actually need a recovery plan
+    Set(
+        _needsRecovery,
+        _total < 8 &&
+        !(
+            _reasonVal = "Sick" ||
+            _reasonVal = "Vacation" ||
+            _reasonVal = "Training (Consta)" ||
+            _reasonVal = "New Employee Training" ||
+            _reasonVal = "Project"        // ← NEW BYPASS REASON
+        )
+    );
+
+    // Check if recovery info is missing
+    Set(
+        _missingRecovery,
+        _needsRecovery &&
+        (
+            IsBlank(dpRecoveryDate.SelectedDate) ||
+            Value(txtRecoveryQty.Text) < 1
+        )
+    );
+
+    // Decide: show error or submit 
+    If(
+        _missingRecovery,
+        Notify(
+            "Because your iQueries and Mavericks are below 8 and the reason is not Sick, Vacation, Training (Consta), New Employee Training, or Project, please enter a Recovery Date and Quantity.",
+            NotificationType.Error
+        ),
+        If(
+            Form.Valid,
+            SubmitForm(Form),
+            Notify(
+                "Please complete the highlighted required fields.",
+                NotificationType.Error
+            )
+        )
+    )
+)
+
+    AFTER
+// Calculate PNQs, Wilburs, Total
+Set(
+    _pnq,
+    If(
+        IsBlank(inpPNQ.Text),
+        0,
+        Value(inpPNQ.Text)
+    )
+);
+Set(
+    _wil,
+    If(
+        IsBlank(inpWilbur.Text),
+        0,
+        Value(inpWilbur.Text)
+    )
+);
+Set(_total, _pnq + _wil);
+
+// Read the selected reason
+Set(
+    _reasonVal,
+    If(
+        IsBlank(cmbReason.Selected),
+        "",
+        cmbReason.Selected.Value
+    )
+);
+
+// If below 8 and NO reason at all, ask user to enter a reason
+If(
+    _total < 8 && _reasonVal = "",
+    Notify(
+        "Because you are below the daily target, please select a reason.",
+        NotificationType.Error
+    ),
+
+    // Determine if we actually need a recovery plan
+    Set(
+        _needsRecovery,
+        _total < 8 &&
+        !(
+            _reasonVal = "Sick" ||
+            _reasonVal = "Vacation" ||
+            _reasonVal = "Training (Consta)" ||
+            _reasonVal = "New Employee Training" ||
+            _reasonVal = "Project"        // ← NEW BYPASS REASON
+        )
+    );
+
+    // Check if recovery info is missing
+    Set(
+        _missingRecovery,
+        _needsRecovery &&
+        (
+            IsBlank(dpRecoveryDate.SelectedDate) ||
+            Value(txtRecoveryQty.Text) < 1
+        )
+    );
+
+    // Decide: show error or submit 
+    If(
+        _missingRecovery,
+        Notify(
+            "Because your iQueries and Mavericks are below 8 and the reason is not Sick, Vacation, Training (Consta), New Employee Training, or Project, please enter a Recovery Date and Quantity.",
+            NotificationType.Error
+        ),
+        If(
+            Form.Valid,
+            // Lock the save icon, then block a second entry for the same day
+            Set(_isSaving, true);
+            If(
+                IfError(
+                    IsBlank(
+                        LookUp(
+                            'Daily PNQ Log',
+                            'Created By'.Email = User().Email &&
+                            'Work Date' = DataCardValue9.SelectedDate,
+                            ID
+                        )
+                    ),
+                    true
+                ),
+                SubmitForm(Form),
+                Set(_isSaving, false);
+                Notify(
+                    "You already have an entry for " & Text(DataCardValue9.SelectedDate, "mmm d, yyyy") & ". To change it, open the SharePoint list with the database icon.",
+                    NotificationType.Warning
+                )
+            ),
+            Notify(
+                "Please complete the highlighted required fields.",
+                NotificationType.Error
+            )
+        )
+    )
+)
+
+    Fallback (use if test 2 or test 4 shows no warning although the row
+    exists): delete the duplicate row the failed test created, then in
+    AFTER replace the line
+        'Work Date' = DataCardValue9.SelectedDate,
+    with
+        'Work Date' >= DataCardValue9.SelectedDate && 'Work Date' < DateAdd(DataCardValue9.SelectedDate, 1),
+    Both forms are delegable for this column. Then repeat from test 2.
+
+A2. Property: DisplayMode
+
+    BEFORE
+DisplayMode.Edit
+
+    (Not written in the .pa.yaml because it is the default. Controls/4.json
+    confirms DisplayMode.Edit.)
+
+    AFTER
+If(_isSaving, DisplayMode.Disabled, DisplayMode.Edit)
+
+    Why: while a save is in progress, the icon cannot be pressed again.
+    Before the first save _isSaving is blank, which counts as false, so the
+    icon is active when the app opens.
+
+A3. Property: DisabledColor
+
+    BEFORE
+RGBA(0, 0, 0, 1)
+
+    AFTER
+RGBA(0, 0, 0, 0.35)
+
+    Why: today DisabledColor is the same black as Color, so a disabled icon
+    would look active. At 35% opacity the employee can see it is busy.
+
+
+══════════════════════════════════════════════════════════════════════
+B. Form (the edit form)
+══════════════════════════════════════════════════════════════════════
+Tree View Path: EditScreen1 > Form
+Select Form, then do B1, B2 and B3.
+
+B1. Property: OnSuccess
+
+    BEFORE
+Notify(
+    "Entry submitted successfully.",
+    NotificationType.Success
+);
+ResetForm(Form)
+
+    AFTER
+Set(_isSaving, false);
+Notify(
+    "Entry submitted successfully.",
+    NotificationType.Success
+);
+ResetForm(Form)
+
+B2. Property: OnFailure
+
+    BEFORE
+Notify(
+    Coalesce(
+        First(Errors([@'Daily PNQ Log'], Form.LastSubmit)).Message,
+        "Could not save. Please check the highlighted fields."
+    ),
+    NotificationType.Error
+)
+
+    AFTER
+Set(_isSaving, false);
+Notify(
+    Coalesce(
+        First(Errors([@'Daily PNQ Log'], Form.LastSubmit)).Message,
+        "Could not save. Please check the highlighted fields."
+    ),
+    NotificationType.Error
+)
+
+    Why (B1 and B2): unlock the save icon once SharePoint answers. The
+    messages and the form reset are unchanged.
+
+B3. Property: OnReset
+
+    BEFORE
+    NOT SET IN THE EXPORT — empty. (Controls/4.json has no OnReset rule.)
+
+    AFTER
+Set(_isSaving, false)
+
+    Why: ResetForm(Form) runs this. Both the reload icon (IconCancel1) and
+    OnSuccess call ResetForm, so the reload icon is a manual way to unlock
+    the save icon in any unexpected case.
+
+
+TESTING IN DEV
+──────────────
+Before you start: in the dev SharePoint list, delete (or note) any rows you
+created for today and for the two test dates you plan to use.
+
+Primary
+1. Today's Work Date, enter 8 + 0, press Save. Expected: success message,
+   form resets, one new row in the dev list.
+2. Without changing the date, enter 8 + 0 again and press Save.
+   Expected: warning "You already have an entry for <today>..." and no new
+   row. The save icon is active again right after the warning. If no
+   warning appears, use the Fallback under A1.
+3. Change Work Date to a day you have not logged, enter 8 + 0, and click
+   Save quickly two or three times. Expected: the save glyph fades after
+   the first click, and only one row is created.
+4. Pick the date from test 3 again and press Save. Expected: the duplicate
+   warning. If no warning appears although the row exists, use the
+   Fallback under A1.
+
+Regression
+5. Total below 8 with no reason: "please select a reason" message, no row,
+   save icon stays active.
+6. Total below 8, non-exempt reason, Recovery Date empty: the recovery
+   message, no row.
+7. Total below 8 with an exempt reason (Sick, Vacation, Training (Consta),
+   New Employee Training, Project) and no recovery details, on a new date:
+   saves.
+8. Reload icon (IconCancel1) clears the form. Database and dashboard icons
+   still open their links.
+9. SharePoint rejection: in the dev list settings, temporarily make
+   Comments required (the app card stays optional). Save with Comments
+   empty on a new date. Do not refresh the data source in Studio during
+   this test. Expected: the SharePoint error message (from OnFailure), no
+   row, and the save icon becomes active again. Then set Comments back to
+   optional.
+
+Edge cases
+10. Network off: turn off Wi-Fi and press Save on a new date. Expected:
+    an error appears. If the save icon stays grey, press the reload icon:
+    it must become active again.
+11. If the duplicate warning never appears for anyone, User().Email may
+    differ from the SharePoint account email in your tenant. Tell me what
+    the Created By column shows for your rows.
+
+
+ROLLBACK
+────────
+Paste the BEFORE values back for A1, A2, A3, B1 and B2. For B3, clear the
+OnReset formula (leave it empty). The column indexes from step 0 can stay;
+they only make filtering faster.

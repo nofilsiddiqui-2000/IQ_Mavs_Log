@@ -45,16 +45,23 @@ HOW TO USE THIS FILE
 ────────────────────
 - Work through the sections in order, A to N. Each section is one control.
   Do every item of that control, then move on.
-- Items marked [KEEP ORIGINAL] have the same AFTER as BEFORE. Your dev app
-  may still show a value from the earlier attempt. If so, paste AFTER.
+- Items marked [KEEP ORIGINAL] have the same AFTER as BEFORE. If you
+  restored the original app, just confirm the value. If Studio shows
+  anything else, paste AFTER.
 - Paste formulas in the formula bar without an initial equals sign.
 - Data cards are locked. Select the card in Tree view and use Advanced >
   Unlock to change properties before you edit the card or its controls.
 - Type layout values in the formula bar. Do not drag controls, or Studio
   rewrites the positions.
-- QUICK CHECK: after section A, section B and item F3, press F5. The
-  background should cover the whole window and the form should be
-  centered. If not, stop and tell me what you see before you continue.
+- QUICK CHECK: after section A, section B and item F3:
+  1. Add a temporary label to EditScreen1 with
+     Text = App.Width & " x " & App.Height
+  2. Press F5 with the browser maximized and note the value shown.
+  3. Check that the background covers the whole window and the form is
+     centered.
+  4. Delete the temporary label.
+  If the background does not cover the window, stop and tell me what you
+  saw and the value from the label.
 
 Not changed: IconCancel1, Icon2, Icon2_1, the ErrorMessage and "*" labels,
 txtTotalCompleted, all DataField/Update/Default bindings, Form.OnSuccess
@@ -175,8 +182,8 @@ C. RectQuickActionBar3 (yellow header bar)
 
 C1. Tree View Path: EditScreen1 > RectQuickActionBar3
     Property: Height
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     49.58
@@ -394,8 +401,8 @@ E2. Tree View Path: EditScreen1 > LblAppName3
 
 E3. Tree View Path: EditScreen1 > LblAppName3
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     318
@@ -418,8 +425,8 @@ E4. Tree View Path: EditScreen1 > LblAppName3
 
 E5. Tree View Path: EditScreen1 > LblAppName3
     Property: Y
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     0.00
@@ -447,8 +454,8 @@ F1. Tree View Path: EditScreen1 > Form
 
 F2. Tree View Path: EditScreen1 > Form
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     700
@@ -471,8 +478,8 @@ F3. Tree View Path: EditScreen1 > Form
 
 F4. Tree View Path: EditScreen1 > Form
     Property: Y
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     49
@@ -489,8 +496,8 @@ G. Work Date_DataCard2
 
 G1. Tree View Path: EditScreen1 > Form > Work Date_DataCard2
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     700
@@ -513,8 +520,8 @@ G2. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardKey9
 
 G3. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardValue9
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     640
@@ -542,8 +549,8 @@ H1. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
 
 H2. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     700
@@ -566,8 +573,8 @@ H3. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > DataCardKey1
 
 H4. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > inpPNQ
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     640
@@ -584,8 +591,8 @@ I. Wilburs Completed_DataCard2
 
 I1. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     700
@@ -619,8 +626,8 @@ I3. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardK
 
 I4. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > inpWilbur
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     640
@@ -637,8 +644,8 @@ J. Reason Not Meeting Target_DataCard2
 
 J1. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     700
@@ -661,8 +668,8 @@ J2. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > D
 
 J3. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > cmbReason
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     640
@@ -679,8 +686,8 @@ K. Recovery Date_DataCard2
 
 K1. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     700
@@ -714,8 +721,8 @@ K3. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDat
 
 K4. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDate
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     640
@@ -732,8 +739,8 @@ L. Recovery Quantity_DataCard2
 
 L1. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     700
@@ -756,8 +763,8 @@ L2. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > DataCardK
 
 L3. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > txtRecoveryQty
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     640
@@ -774,8 +781,8 @@ M. Comments_DataCard2
 
 M1. Tree View Path: EditScreen1 > Form > Comments_DataCard2
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     700
@@ -798,8 +805,8 @@ M2. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > DataCardKey15
 
 M3. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > inpComments
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     640
@@ -816,8 +823,8 @@ N. Total Completed_DataCard2
 
 N1. Tree View Path: EditScreen1 > Form > Total Completed_DataCard2
     Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
-    anything else (left over from the earlier attempt), paste AFTER.
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
+    original app, just confirm the value.
 
     BEFORE
     700
@@ -838,8 +845,9 @@ TESTING IN DEV
    header, as large as in the original app.
 2. Resize the browser window (narrower, wider, shorter). Expected: the
    background still covers the window and the form stays centered. On a
-   very narrow window the form zooms down to fit the width, and empty
-   space appears below the fields.
+   window narrower than about 16:9 (for example 1920 x 1200), the app
+   zooms to fit the width. The form stays centered and empty space appears
+   below the fields.
 3. Text: the heading reads "iQuery and Mavericks Log" on one line. The
    labels read "iQueries Completed" and "Mavericks Completed". All labels
    and the Recovery Date picker use Open Sans. The Work Date picker and
@@ -860,8 +868,12 @@ TESTING IN DEV
 ══════════════════════════════════════════════════════════════════════
 ROLLBACK
 ══════════════════════════════════════════════════════════════════════
-Paste the BEFORE value of every item, and set Lock aspect ratio back On
-(A3). Type A1 and A2 as plain text.
+1. If the duplicate-save record (2026-11-19_Prevent_Duplicate_Saves) is
+   applied, roll it back first.
+2. Set Lock aspect ratio back On (A3). Do this first, because changing the
+   Display settings can rewrite the screen Width and Height.
+3. Paste the BEFORE values of B1 and B2, then of every other item.
+4. Type A1 and A2 as plain text.
 
 
 Microsoft references
