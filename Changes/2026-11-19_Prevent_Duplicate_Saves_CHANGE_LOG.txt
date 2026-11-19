@@ -16,7 +16,7 @@ Source and order
   after that visual refresh record.
 - Every BEFORE below is identical in the original app, with one
   exception: IconAccept1.OnSelect. Its BEFORE is the visual refresh
-  AFTER (item D2 there), which only changes the recovery message to
+  AFTER (item C2 there), which only changes the recovery message to
   "iQueries and Mavericks".
 - Both records touch IconAccept1. The visual refresh changes X and
   OnSelect; this record changes OnSelect, DisplayMode and DisabledColor.

@@ -43,17 +43,14 @@ stays small on a large monitor.
 
 HOW TO USE THIS FILE
 ────────────────────
-- Work through the sections in order, A to N. Each section is one control.
+- Work through the sections in order, A to L. Each section is one control.
   Do every item of that control, then move on.
-- Items marked [KEEP ORIGINAL] have the same AFTER as BEFORE. If you
-  restored the original app, just confirm the value. If Studio shows
-  anything else, paste AFTER.
 - Paste formulas in the formula bar without an initial equals sign.
 - Data cards are locked. Select the card in Tree view and use Advanced >
   Unlock to change properties before you edit the card or its controls.
 - Type layout values in the formula bar. Do not drag controls, or Studio
   rewrites the positions.
-- QUICK CHECK: after section A, section B and item F3:
+- QUICK CHECK: after sections A and B and item E2 (Form X):
   1. Add a temporary label to EditScreen1 with
      Text = App.Width & " x " & App.Height
   2. Press F5 with the browser maximized and note the value shown.
@@ -63,7 +60,9 @@ HOW TO USE THIS FILE
   If the background does not cover the window, stop and tell me what you
   saw and the value from the label.
 
-Not changed: IconCancel1, Icon2, Icon2_1, the ErrorMessage and "*" labels,
+Not changed: the header bar height, the heading width and row, the form
+width and position under the header, all card and input sizes,
+IconCancel1, Icon2, Icon2_1, the ErrorMessage and "*" labels,
 txtTotalCompleted, all DataField/Update/Default bindings, Form.OnSuccess
 and Form.OnFailure, and the SharePoint list 'Daily PNQ Log' (columns
 PNQsCompleted and WilbursCompleted keep their names).
@@ -72,27 +71,17 @@ PNQsCompleted and WilbursCompleted keep their names).
 Summary
 ───────
  A. App settings ........................ Name, Description, Display
- B. EditScreen1 ......................... Width, Height
- C. RectQuickActionBar3 ................. Height
- D. IconAccept1 ......................... X, OnSelect
- E. LblAppName3 ......................... Text, Font, Width, X, Y
- F. Form ................................ Height, Width, X, Y
- G. Work Date_DataCard2 ................. card Width, DataCardKey9 Font,
-                                          DataCardValue9 Width
- H. PNQs Completed_DataCard2 ............ card DisplayName and Width,
-                                          DataCardKey10 Font, inpPNQ Width
- I. Wilburs Completed_DataCard2 ......... card Width, DataCardKey11 Text
-                                          and Font, inpWilbur Width
- J. Reason Not Meeting Target_DataCard2 . card Width, DataCardKey14 Font,
-                                          cmbReason Width
- K. Recovery Date_DataCard2 ............. card Width, DataCardKey12 Font,
-                                          dpRecoveryDate Font and Width
- L. Recovery Quantity_DataCard2 ......... card Width, DataCardKey13 Font,
-                                          txtRecoveryQty Width
- M. Comments_DataCard2 .................. card Width, DataCardKey15 Font,
-                                          inpComments Width
- N. Total Completed_DataCard2 ........... card Width
-
+ B. EditScreen1 ........................... Width and Height
+ C. IconAccept1 ........................... X and OnSelect
+ D. LblAppName3 ........................... Text, Font and X
+ E. Form .................................. Height and X
+ F. Work Date_DataCard2 ................... DataCardKey9 Font
+ G. PNQs Completed_DataCard2 .............. DisplayName; DataCardKey10 Font
+ H. Wilburs Completed_DataCard2 ........... DataCardKey11 Text and Font
+ I. Reason Not Meeting Target_DataCard2 ... DataCardKey14 Font
+ J. Recovery Date_DataCard2 ............... DataCardKey12 Font; dpRecoveryDate Font
+ K. Recovery Quantity_DataCard2 ........... DataCardKey13 Font
+ L. Comments_DataCard2 .................... DataCardKey15 Font
 
 ══════════════════════════════════════════════════════════════════════
 A. APP SETTINGS
@@ -177,28 +166,10 @@ B2. Tree View Path: EditScreen1
 
 
 ══════════════════════════════════════════════════════════════════════
-C. RectQuickActionBar3 (yellow header bar)
+C. IconAccept1 (save icon)
 ══════════════════════════════════════════════════════════════════════
 
-C1. Tree View Path: EditScreen1 > RectQuickActionBar3
-    Property: Height
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    49.58
-
-    AFTER
-    49.58
-
-    Why: Keeps the original header height.
-
-
-══════════════════════════════════════════════════════════════════════
-D. IconAccept1 (save icon)
-══════════════════════════════════════════════════════════════════════
-
-D1. Tree View Path: EditScreen1 > IconAccept1
+C1. Tree View Path: EditScreen1 > IconAccept1
     Property: X
 
     BEFORE
@@ -209,7 +180,7 @@ D1. Tree View Path: EditScreen1 > IconAccept1
 
     Why: Keeps the save icon at the right edge of the full-width header.
 
-D2. Tree View Path: EditScreen1 > IconAccept1
+C2. Tree View Path: EditScreen1 > IconAccept1
     Property: OnSelect
 
     BEFORE
@@ -374,10 +345,10 @@ If(
 
 
 ══════════════════════════════════════════════════════════════════════
-E. LblAppName3 (heading)
+D. LblAppName3 (heading)
 ══════════════════════════════════════════════════════════════════════
 
-E1. Tree View Path: EditScreen1 > LblAppName3
+D1. Tree View Path: EditScreen1 > LblAppName3
     Property: Text
 
     BEFORE
@@ -388,7 +359,7 @@ E1. Tree View Path: EditScreen1 > LblAppName3
 
     Why: New app title.
 
-E2. Tree View Path: EditScreen1 > LblAppName3
+D2. Tree View Path: EditScreen1 > LblAppName3
     Property: Font
 
     BEFORE
@@ -399,20 +370,7 @@ E2. Tree View Path: EditScreen1 > LblAppName3
 
     Why: Open Sans instead of Verdana.
 
-E3. Tree View Path: EditScreen1 > LblAppName3
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    318
-
-    AFTER
-    318
-
-    Why: Keeps the original width. The new title fits on one line.
-
-E4. Tree View Path: EditScreen1 > LblAppName3
+D3. Tree View Path: EditScreen1 > LblAppName3
     Property: X
 
     BEFORE
@@ -423,49 +381,27 @@ E4. Tree View Path: EditScreen1 > LblAppName3
 
     Why: Centers the heading on the full-width header.
 
-E5. Tree View Path: EditScreen1 > LblAppName3
-    Property: Y
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    0.00
-
-    AFTER
-    0.00
-
-    Why: Keeps the heading on the header row.
-
 
 ══════════════════════════════════════════════════════════════════════
-F. Form (the edit form)
+E. Form (the edit form)
 ══════════════════════════════════════════════════════════════════════
 
-F1. Tree View Path: EditScreen1 > Form
+E1. Tree View Path: EditScreen1 > Form
     Property: Height
 
     BEFORE
     600
 
     AFTER
-    Parent.Height - Self.Y
+    Max(600, Parent.Height - Self.Y)
 
-    Why: The form runs from under the header to the bottom of the screen.
+    Why: 600 is the original form height. Below the 49-pixel header only
+    591 pixels are visible, so the last 9 pixels of the form fall below the
+    bottom edge. The original app worked the same way. Without that spare
+    height the fields need slightly more room than the form has, and the
+    form shows a scroll bar. On a taller window the form grows with it.
 
-F2. Tree View Path: EditScreen1 > Form
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    700
-
-    AFTER
-    700
-
-    Why: Keeps the original 700 width.
-
-F3. Tree View Path: EditScreen1 > Form
+E2. Tree View Path: EditScreen1 > Form
     Property: X
 
     BEFORE
@@ -476,38 +412,12 @@ F3. Tree View Path: EditScreen1 > Form
 
     Why: Centers the form on the screen.
 
-F4. Tree View Path: EditScreen1 > Form
-    Property: Y
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    49
-
-    AFTER
-    49
-
-    Why: Keeps the form directly under the header.
-
 
 ══════════════════════════════════════════════════════════════════════
-G. Work Date_DataCard2
+F. Work Date_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-G1. Tree View Path: EditScreen1 > Form > Work Date_DataCard2
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    700
-
-    AFTER
-    700
-
-    Why: Keeps the original card width.
-
-G2. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardKey9
+F1. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardKey9
     Property: Font
 
     BEFORE
@@ -518,25 +428,12 @@ G2. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardKey9
 
     Why: Open Sans instead of Verdana.
 
-G3. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardValue9
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    640
-
-    AFTER
-    640
-
-    Why: Keeps the original input width.
-
 
 ══════════════════════════════════════════════════════════════════════
-H. PNQs Completed_DataCard2
+G. PNQs Completed_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-H1. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
+G1. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
     Property: DisplayName
 
     BEFORE
@@ -547,20 +444,7 @@ H1. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
 
     Why: Label and input tooltip read this, so both show "iQueries Completed". The SharePoint column (PNQsCompleted) is unchanged.
 
-H2. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    700
-
-    AFTER
-    700
-
-    Why: Keeps the original card width.
-
-H3. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > DataCardKey10
+G2. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > DataCardKey10
     Property: Font
 
     BEFORE
@@ -571,38 +455,12 @@ H3. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > DataCardKey1
 
     Why: Open Sans instead of Verdana.
 
-H4. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > inpPNQ
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    640
-
-    AFTER
-    640
-
-    Why: Keeps the original input width.
-
 
 ══════════════════════════════════════════════════════════════════════
-I. Wilburs Completed_DataCard2
+H. Wilburs Completed_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-I1. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    700
-
-    AFTER
-    700
-
-    Why: Keeps the original card width.
-
-I2. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
+H1. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
     Property: Text
 
     BEFORE
@@ -613,7 +471,7 @@ I2. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardK
 
     Why: New label text.
 
-I3. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
+H2. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
     Property: Font
 
     BEFORE
@@ -624,38 +482,12 @@ I3. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardK
 
     Why: Open Sans instead of Verdana.
 
-I4. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > inpWilbur
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    640
-
-    AFTER
-    640
-
-    Why: Keeps the original input width.
-
 
 ══════════════════════════════════════════════════════════════════════
-J. Reason Not Meeting Target_DataCard2
+I. Reason Not Meeting Target_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-J1. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    700
-
-    AFTER
-    700
-
-    Why: Keeps the original card width.
-
-J2. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > DataCardKey14
+I1. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > DataCardKey14
     Property: Font
 
     BEFORE
@@ -666,38 +498,12 @@ J2. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > D
 
     Why: Open Sans instead of Verdana.
 
-J3. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > cmbReason
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    640
-
-    AFTER
-    640
-
-    Why: Keeps the original input width.
-
 
 ══════════════════════════════════════════════════════════════════════
-K. Recovery Date_DataCard2
+J. Recovery Date_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-K1. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    700
-
-    AFTER
-    700
-
-    Why: Keeps the original card width.
-
-K2. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > DataCardKey12
+J1. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > DataCardKey12
     Property: Font
 
     BEFORE
@@ -708,7 +514,7 @@ K2. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > DataCardKey12
 
     Why: Open Sans instead of Verdana.
 
-K3. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDate
+J2. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDate
     Property: Font
 
     BEFORE
@@ -719,38 +525,12 @@ K3. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDat
 
     Why: Open Sans instead of Verdana, to match the label.
 
-K4. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDate
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    640
-
-    AFTER
-    640
-
-    Why: Keeps the original input width.
-
 
 ══════════════════════════════════════════════════════════════════════
-L. Recovery Quantity_DataCard2
+K. Recovery Quantity_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-L1. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    700
-
-    AFTER
-    700
-
-    Why: Keeps the original card width.
-
-L2. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > DataCardKey13
+K1. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > DataCardKey13
     Property: Font
 
     BEFORE
@@ -761,38 +541,12 @@ L2. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > DataCardK
 
     Why: Open Sans instead of Verdana.
 
-L3. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > txtRecoveryQty
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    640
-
-    AFTER
-    640
-
-    Why: Keeps the original input width.
-
 
 ══════════════════════════════════════════════════════════════════════
-M. Comments_DataCard2
+L. Comments_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
-M1. Tree View Path: EditScreen1 > Form > Comments_DataCard2
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    700
-
-    AFTER
-    700
-
-    Why: Keeps the original card width.
-
-M2. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > DataCardKey15
+L1. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > DataCardKey15
     Property: Font
 
     BEFORE
@@ -802,37 +556,6 @@ M2. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > DataCardKey15
     Font.'Open Sans'
 
     Why: Open Sans instead of Verdana.
-
-M3. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > inpComments
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    640
-
-    AFTER
-    640
-
-    Why: Keeps the original input width.
-
-
-══════════════════════════════════════════════════════════════════════
-N. Total Completed_DataCard2
-══════════════════════════════════════════════════════════════════════
-
-N1. Tree View Path: EditScreen1 > Form > Total Completed_DataCard2
-    Property: Width
-    [KEEP ORIGINAL] AFTER is the same as BEFORE. If you restored the
-    original app, just confirm the value.
-
-    BEFORE
-    700
-
-    AFTER
-    700
-
-    Why: Keeps the original card width.
 
 
 ══════════════════════════════════════════════════════════════════════
