@@ -1,92 +1,98 @@
 iQuery and Mavericks Log
 Power Apps Studio | Before and after
-November 16, 2026 (revised November 19, 2026) | PENDING TEST — Not yet tested in dev.
+November 16, 2026 (final version, November 19, 2026) | PENDING TEST — Not yet tested in dev.
 
 Change type
-Visual refresh: naming and typography. Layout stays fixed and scaled.
+Visual refresh: new names, Open Sans font, and a full-window background
+with the form centered at full height.
 
-Verified source
-BEFORE = the original app:
-  archived versions/Log_v1_20261116195316.zip
-  (Header.json last saved 03/25/2026 21:59:57 UTC)
-Checked against the dev app as exported after the first attempt:
-  Log_19_Nov_20261119142038.zip on main at 54b5cb4
-  (Header.json last saved 11/16/2026 20:41:33 UTC)
-
-
-WHY THIS FILE WAS REVISED
-─────────────────────────
-The first version of this change also switched the app to a Responsive
-layout. In Studio it looked fine. In Preview (F5) and the player, the yellow
-header and background stretched across the whole window while the form
-(Work Date to Comments) shrank to a small block at the top center.
-
-Cause: the original app uses Scale to fit ON and Lock aspect ratio ON. The
-player zooms the whole canvas to the window, so the 700-pixel form looks
-large. Responsive turns Scale to fit off, so the player draws everything at
-real pixel size. Studio hides this because it zooms the canvas to fit the
-editing pane.
-
-Decision: drop the responsive part. Keep the new names, the new save
-message, and the Open Sans font. Every layout value goes back to the
-original.
+Source
+BEFORE = the original app, archived versions/Log_v1_20261116195316.zip
+(Header.json last saved 03/25/2026 21:59:57 UTC). Every BEFORE value
+below was read directly from that export.
+AFTER  = the final value to paste.
+This file replaces every earlier version of this change.
 
 
-HOW TO READ THIS FILE
-─────────────────────
-- Changes are grouped by control. Finish every property of one control,
-  then move on to the next one.
-- BEFORE is the value in the original app (Log_v1).
-- AFTER is the final value to paste.
-- "DEV NOW" appears only where the dev app still has a value from the first
-  attempt. Replace that value with AFTER. Where BEFORE and AFTER are the
-  same, AFTER puts the original value back.
-- Paste formulas without an initial equals sign.
-- For a property on a locked data card, select the card in Tree view and
-  use Advanced > Unlock to change properties.
+WHAT THE APP WILL LOOK LIKE
+───────────────────────────
+- The background image covers the whole window, with no empty bars.
+- The yellow header runs across the full width. The save icon sits at the
+  right edge and the heading in the middle.
+- The form is centered and zoomed to fill the window height, at the same
+  large size as the original app.
+- The heading reads "iQuery and Mavericks Log". The labels read "iQueries
+  Completed" and "Mavericks Completed". Labels use Open Sans.
+
+How it works
+- Scale to fit ON makes the player zoom the whole app to the window, so
+  the form stays large.
+- Lock aspect ratio OFF lets the canvas widen or lengthen to the window's
+  shape.
+- The screen takes that full size, so the background image (already set
+  to ImagePosition.Fill) covers everything.
+- The form keeps its original 700 width and is centered.
+
+Why not the original layout: the original screen was only 700 x 650
+inside a 1136 x 640 canvas. The background only ever covered a 700-wide
+rectangle.
+
+Why not Responsive: Responsive layout never zooms. The 700-wide form
+stays small on a large monitor.
+
+
+HOW TO USE THIS FILE
+────────────────────
+- Work through the sections in order, A to N. Each section is one control.
+  Do every item of that control, then move on.
+- Items marked [KEEP ORIGINAL] have the same AFTER as BEFORE. Your dev app
+  may still show a value from the earlier attempt. If so, paste AFTER.
+- Paste formulas in the formula bar without an initial equals sign.
+- Data cards are locked. Select the card in Tree view and use Advanced >
+  Unlock to change properties before you edit the card or its controls.
 - Type layout values in the formula bar. Do not drag controls, or Studio
   rewrites the positions.
+- QUICK CHECK: after section A, section B and item F3, press F5. The
+  background should cover the whole window and the form should be
+  centered. If not, stop and tell me what you see before you continue.
+
+Not changed: IconCancel1, Icon2, Icon2_1, the ErrorMessage and "*" labels,
+txtTotalCompleted, all DataField/Update/Default bindings, Form.OnSuccess
+and Form.OnFailure, and the SharePoint list 'Daily PNQ Log' (columns
+PNQsCompleted and WilbursCompleted keep their names).
 
 
-Summary by control
-──────────────────
- A. App settings ............. Name, Description, Display (scale to fit)
- B. EditScreen1 .............. Width, Height
- C. RectQuickActionBar3 ...... Height
- D. IconAccept1 .............. X, OnSelect
- E. LblAppName3 .............. Text, Font, Width, X, Y
- F. Form ..................... Height, Width, X, Y
- G. Work Date_DataCard2 ...... card Width, DataCardKey9 Font,
-                               DataCardValue9 Width
- H. PNQs Completed_DataCard2 . card DisplayName, card Width,
-                               DataCardKey10 Font, inpPNQ Width
- I. Wilburs Completed_DataCard2  card Width, DataCardKey11 Text and Font,
-                               inpWilbur Width
- J. Reason Not Meeting Target_DataCard2  card Width, DataCardKey14 Font,
-                               cmbReason Width
- K. Recovery Date_DataCard2 .. card Width, DataCardKey12 Font,
-                               dpRecoveryDate Font and Width
- L. Recovery Quantity_DataCard2  card Width, DataCardKey13 Font,
-                               txtRecoveryQty Width
- M. Comments_DataCard2 ....... card Width, DataCardKey15 Font,
-                               inpComments Width
- N. Total Completed_DataCard2  card Width
-
-Not changed: IconCancel1, the ErrorMessage labels, the "*" labels,
-txtTotalCompleted, all DataField/Update/Default bindings, OnSuccess and
-OnFailure, and the SharePoint list 'Daily PNQ Log' (columns PNQsCompleted
-and WilbursCompleted keep their names).
-Other differences between the two exports are Studio/export noise (save
-timestamps, load times, a preview flag, line endings) and need no action.
+Summary
+───────
+ A. App settings ........................ Name, Description, Display
+ B. EditScreen1 ......................... Width, Height
+ C. RectQuickActionBar3 ................. Height
+ D. IconAccept1 ......................... X, OnSelect
+ E. LblAppName3 ......................... Text, Font, Width, X, Y
+ F. Form ................................ Height, Width, X, Y
+ G. Work Date_DataCard2 ................. card Width, DataCardKey9 Font,
+                                          DataCardValue9 Width
+ H. PNQs Completed_DataCard2 ............ card DisplayName and Width,
+                                          DataCardKey10 Font, inpPNQ Width
+ I. Wilburs Completed_DataCard2 ......... card Width, DataCardKey11 Text
+                                          and Font, inpWilbur Width
+ J. Reason Not Meeting Target_DataCard2 . card Width, DataCardKey14 Font,
+                                          cmbReason Width
+ K. Recovery Date_DataCard2 ............. card Width, DataCardKey12 Font,
+                                          dpRecoveryDate Font and Width
+ L. Recovery Quantity_DataCard2 ......... card Width, DataCardKey13 Font,
+                                          txtRecoveryQty Width
+ M. Comments_DataCard2 .................. card Width, DataCardKey15 Font,
+                                          inpComments Width
+ N. Total Completed_DataCard2 ........... card Width
 
 
 ══════════════════════════════════════════════════════════════════════
 A. APP SETTINGS
 ══════════════════════════════════════════════════════════════════════
-Studio Path: Settings (gear icon or ... > Settings)
+Studio Path: Settings (gear icon, or ... > Settings)
 
-A1. Settings > General > Name
-    Replace the text in the Name box.
+A1. Settings > General > Name   (plain text)
 
     BEFORE
     Daily PNQ & Wilbur Log
@@ -94,11 +100,9 @@ A1. Settings > General > Name
     AFTER
     iQuery and Mavericks Log
 
-    Why: the app name shown in Power Apps. Already done in dev (19 Nov
-    export); confirm only.
+    Why: The app name shown in Power Apps.
 
-A2. Settings > General > Description
-    Replace the text in the Description box.
+A2. Settings > General > Description   (plain text)
 
     BEFORE
     Daily PNQ and Mavs Logger app for CM Team members
@@ -106,112 +110,100 @@ A2. Settings > General > Description
     AFTER
     Daily iQueries and Mavericks log for CM Team members.
 
-    Why: updates the wording. Already done in dev; confirm only.
+    Why: Updates the wording.
 
-A3. Settings > Display   *** THIS IS THE FIX FOR THE F5 PROBLEM ***
+A3. Settings > Display
 
     BEFORE
-    Orientation: Landscape    Size: 16:9 (1136 x 640)
+    Orientation: Landscape (1136 x 640)
     Scale to fit: On
     Lock aspect ratio: On
     Lock orientation: On
-
-    DEV NOW
-    Responsive (Scale to fit: Off, Lock aspect ratio: Off)
+    Show mobile device notifications area: Off
 
     AFTER
-    Orientation: Landscape    Size: 16:9 (1136 x 640)
+    Orientation: Landscape (1136 x 640)
     Scale to fit: On
-    Lock aspect ratio: On
+    Lock aspect ratio: Off
     Lock orientation: On
+    Show mobile device notifications area: Off
 
     Steps
     1. Open Settings > Display.
-    2. Turn Scale to fit ON. (If your Studio shows an "App layout" choice
-       instead, select Fixed, then make sure Scale to fit is On.)
-    3. Turn Lock aspect ratio ON. Leave Lock orientation ON and Landscape.
-       This is a phone-format app, so its size is fixed at 1136 x 640.
-       Check the size only if Studio shows a Size choice.
-    4. Leave Show mobile device notifications area Off.
-    5. Close Settings. Studio may rewrite the EditScreen1 Width and Height
-       formulas when you do this. Section B sets them back.
+    2. Make sure Scale to fit is ON. (If your Studio shows an "App layout"
+       choice, select Fixed, not Responsive.)
+    3. Turn Lock aspect ratio OFF.
+    4. Leave the other settings as listed. This is a phone-format app, so
+       its size is fixed at 1136 x 640.
+    5. Close Settings. Studio may rewrite the EditScreen1 Width and Height.
+       Section B sets them.
 
-    Why: Scale to fit makes the player zoom the whole screen to the window,
-    exactly as before 16 Nov.
+    Why: Scale to fit keeps the form zoomed to the window height. Turning
+    Lock aspect ratio off removes the empty bars at the sides.
 
 
 ══════════════════════════════════════════════════════════════════════
-B. EditScreen1 (the screen itself)
+B. EditScreen1 (the screen)
 ══════════════════════════════════════════════════════════════════════
-Tree View Path: EditScreen1
-Select EditScreen1 in Tree view, then do B1 and B2.
 
-B1. Property: Width
+B1. Tree View Path: EditScreen1
+    Property: Width
 
     BEFORE
     700
 
-    DEV NOW
-    App.Width
-
     AFTER
-    700
+    Max(App.Width, App.DesignWidth)
 
-B2. Property: Height
+    Why: The screen, and its background image, covers the whole window.
+
+B2. Tree View Path: EditScreen1
+    Property: Height
 
     BEFORE
     650
 
-    DEV NOW
-    Max(App.Height, Form.Y + Form.Height)
-
     AFTER
-    650
+    Max(App.Height, App.DesignHeight)
 
-    Why: the original canvas size. With Scale to fit On, the player scales
-    this canvas to the window.
+    Why: The screen, and its background image, covers the whole window height.
 
 
 ══════════════════════════════════════════════════════════════════════
 C. RectQuickActionBar3 (yellow header bar)
 ══════════════════════════════════════════════════════════════════════
-Tree View Path: EditScreen1 > RectQuickActionBar3
 
-C1. Property: Height
+C1. Tree View Path: EditScreen1 > RectQuickActionBar3
+    Property: Height
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     49.58
 
-    DEV NOW
-    LblAppName3.Y + LblAppName3.Height
-
     AFTER
     49.58
 
-    Width stays Parent.Width (unchanged from the original).
+    Why: Keeps the original header height.
 
 
 ══════════════════════════════════════════════════════════════════════
 D. IconAccept1 (save icon)
 ══════════════════════════════════════════════════════════════════════
-Tree View Path: EditScreen1 > IconAccept1
-Select IconAccept1, then do D1 and D2.
 
-D1. Property: X
+D1. Tree View Path: EditScreen1 > IconAccept1
+    Property: X
 
     BEFORE
     641
 
-    DEV NOW
+    AFTER
     Parent.Width - Self.Width
 
-    AFTER
-    641
+    Why: Keeps the save icon at the right edge of the full-width header.
 
-D2. Property: OnSelect
-    Only the text of the recovery message changes. The threshold of 8, the
-    exempt reasons and the SubmitForm logic are identical. Already done in
-    dev; confirm only.
+D2. Tree View Path: EditScreen1 > IconAccept1
+    Property: OnSelect
 
     BEFORE
 // Calculate PNQs, Wilburs, Total
@@ -371,14 +363,15 @@ If(
     )
 )
 
+    Why: Only the recovery message text changes: "PNQs / Wilburs" becomes "iQueries and Mavericks". The threshold of 8, the exempt reasons and the save logic are identical.
+
 
 ══════════════════════════════════════════════════════════════════════
 E. LblAppName3 (heading)
 ══════════════════════════════════════════════════════════════════════
-Tree View Path: EditScreen1 > LblAppName3
-Select LblAppName3, then do E1 to E5. Keep Size 14 and Align Center.
 
-E1. Property: Text   (already done in dev; confirm only)
+E1. Tree View Path: EditScreen1 > LblAppName3
+    Property: Text
 
     BEFORE
     "Daily PNQ / Mavericks Log"
@@ -386,7 +379,10 @@ E1. Property: Text   (already done in dev; confirm only)
     AFTER
     "iQuery and Mavericks Log"
 
-E2. Property: Font   (already done in dev; confirm only)
+    Why: New app title.
+
+E2. Tree View Path: EditScreen1 > LblAppName3
+    Property: Font
 
     BEFORE
     Font.Verdana
@@ -394,96 +390,97 @@ E2. Property: Font   (already done in dev; confirm only)
     AFTER
     Font.'Open Sans'
 
-E3. Property: Width
+    Why: Open Sans instead of Verdana.
+
+E3. Tree View Path: EditScreen1 > LblAppName3
+    Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     318
-
-    DEV NOW
-    Min(318, Parent.Width)
 
     AFTER
     318
 
-E4. Property: X
+    Why: Keeps the original width. The new title fits on one line.
+
+E4. Tree View Path: EditScreen1 > LblAppName3
+    Property: X
 
     BEFORE
     191
 
-    DEV NOW
+    AFTER
     (Parent.Width - Self.Width) / 2
 
-    AFTER
-    191
+    Why: Centers the heading on the full-width header.
 
-E5. Property: Y
+E5. Tree View Path: EditScreen1 > LblAppName3
+    Property: Y
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     0.00
 
-    DEV NOW
-    If(Parent.Width < 660, Self.Height, 0)
-
     AFTER
     0.00
 
-    Why: the new title is shorter than the old one, so it fits the original
-    318-pixel width on one line. Height stays 49.58.
+    Why: Keeps the heading on the header row.
 
 
 ══════════════════════════════════════════════════════════════════════
 F. Form (the edit form)
 ══════════════════════════════════════════════════════════════════════
-Tree View Path: EditScreen1 > Form
-Select Form, then do F1 to F4.
 
-F1. Property: Height
+F1. Tree View Path: EditScreen1 > Form
+    Property: Height
 
     BEFORE
     600
 
-    DEV NOW
-    Max(600, App.Height - Self.Y)
-    (This value was not in the first version of this file. It was added in
-    Studio.)
-
     AFTER
-    600
+    Parent.Height - Self.Y
 
-F2. Property: Width
+    Why: The form runs from under the header to the bottom of the screen.
+
+F2. Tree View Path: EditScreen1 > Form
+    Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     700
 
-    DEV NOW
-    Min(700, Parent.Width)
-
     AFTER
     700
 
-F3. Property: X
+    Why: Keeps the original 700 width.
+
+F3. Tree View Path: EditScreen1 > Form
+    Property: X
 
     BEFORE
     0
-    (The original export has no X formula, so the default 0 applies.)
 
-    DEV NOW
+    AFTER
     (Parent.Width - Self.Width) / 2
 
-    AFTER
-    0
-    (Typing 0 behaves the same as the original default.)
+    Why: Centers the form on the screen.
 
-F4. Property: Y
+F4. Tree View Path: EditScreen1 > Form
+    Property: Y
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     49
 
-    DEV NOW
-    RectQuickActionBar3.Height
-
     AFTER
     49
+
+    Why: Keeps the form directly under the header.
 
 
 ══════════════════════════════════════════════════════════════════════
@@ -492,18 +489,19 @@ G. Work Date_DataCard2
 
 G1. Tree View Path: EditScreen1 > Form > Work Date_DataCard2
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     700
 
-    DEV NOW
-    Parent.Width
-
     AFTER
     700
 
+    Why: Keeps the original card width.
+
 G2. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardKey9
-    Property: Font   (already done in dev; confirm only)
+    Property: Font
 
     BEFORE
     Font.Verdana
@@ -511,25 +509,28 @@ G2. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardKey9
     AFTER
     Font.'Open Sans'
 
+    Why: Open Sans instead of Verdana.
+
 G3. Tree View Path: EditScreen1 > Form > Work Date_DataCard2 > DataCardValue9
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     640
 
-    DEV NOW
-    Parent.Width - 60
-
     AFTER
     640
 
+    Why: Keeps the original input width.
+
 
 ══════════════════════════════════════════════════════════════════════
-H. PNQs Completed_DataCard2 (iQueries Completed)
+H. PNQs Completed_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
 H1. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
-    Property: DisplayName   (already done in dev; confirm only)
+    Property: DisplayName
 
     BEFORE
     DataSourceInfo([@'Daily PNQ Log'],DataSourceInfo.DisplayName,'PNQs Completed')
@@ -537,23 +538,23 @@ H1. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
     AFTER
     "iQueries Completed"
 
-    Why: DataCardKey10.Text and inpPNQ.Tooltip read Parent.DisplayName, so
-    both show the new name. DataField stays "PNQsCompleted".
+    Why: Label and input tooltip read this, so both show "iQueries Completed". The SharePoint column (PNQsCompleted) is unchanged.
 
 H2. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     700
 
-    DEV NOW
-    Parent.Width
-
     AFTER
     700
 
+    Why: Keeps the original card width.
+
 H3. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > DataCardKey10
-    Property: Font   (already done in dev; confirm only)
+    Property: Font
 
     BEFORE
     Font.Verdana
@@ -561,37 +562,41 @@ H3. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > DataCardKey1
     AFTER
     Font.'Open Sans'
 
+    Why: Open Sans instead of Verdana.
+
 H4. Tree View Path: EditScreen1 > Form > PNQs Completed_DataCard2 > inpPNQ
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     640
 
-    DEV NOW
-    Parent.Width - 60
-
     AFTER
     640
 
+    Why: Keeps the original input width.
+
 
 ══════════════════════════════════════════════════════════════════════
-I. Wilburs Completed_DataCard2 (Mavericks Completed)
+I. Wilburs Completed_DataCard2
 ══════════════════════════════════════════════════════════════════════
 
 I1. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     700
 
-    DEV NOW
-    Parent.Width
-
     AFTER
     700
 
+    Why: Keeps the original card width.
+
 I2. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
-    Property: Text   (already done in dev; confirm only)
+    Property: Text
 
     BEFORE
     "Notifications (Mavericks) Completed"
@@ -599,8 +604,10 @@ I2. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardK
     AFTER
     "Mavericks Completed"
 
-I3. Same control (DataCardKey11)
-    Property: Font   (already done in dev; confirm only)
+    Why: New label text.
+
+I3. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > DataCardKey11
+    Property: Font
 
     BEFORE
     Font.Verdana
@@ -608,17 +615,20 @@ I3. Same control (DataCardKey11)
     AFTER
     Font.'Open Sans'
 
+    Why: Open Sans instead of Verdana.
+
 I4. Tree View Path: EditScreen1 > Form > Wilburs Completed_DataCard2 > inpWilbur
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     640
 
-    DEV NOW
-    Parent.Width - 60
-
     AFTER
     640
+
+    Why: Keeps the original input width.
 
 
 ══════════════════════════════════════════════════════════════════════
@@ -627,18 +637,19 @@ J. Reason Not Meeting Target_DataCard2
 
 J1. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     700
 
-    DEV NOW
-    Parent.Width
-
     AFTER
     700
 
+    Why: Keeps the original card width.
+
 J2. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > DataCardKey14
-    Property: Font   (already done in dev; confirm only)
+    Property: Font
 
     BEFORE
     Font.Verdana
@@ -646,17 +657,20 @@ J2. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > D
     AFTER
     Font.'Open Sans'
 
+    Why: Open Sans instead of Verdana.
+
 J3. Tree View Path: EditScreen1 > Form > Reason Not Meeting Target_DataCard2 > cmbReason
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     640
 
-    DEV NOW
-    Parent.Width - 60
-
     AFTER
     640
+
+    Why: Keeps the original input width.
 
 
 ══════════════════════════════════════════════════════════════════════
@@ -665,55 +679,51 @@ K. Recovery Date_DataCard2
 
 K1. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     700
 
-    DEV NOW
-    Parent.Width
-
     AFTER
     700
+
+    Why: Keeps the original card width.
 
 K2. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > DataCardKey12
-    Property: Font   (already done in dev; confirm only)
+    Property: Font
 
     BEFORE
     Font.Verdana
 
     AFTER
     Font.'Open Sans'
+
+    Why: Open Sans instead of Verdana.
 
 K3. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDate
-    Property: Font   *** NOT YET DONE IN DEV ***
+    Property: Font
 
     BEFORE
     Font.Verdana
 
-    DEV NOW
-    Font.Verdana  (the 19 Nov export still has Verdana here)
-
     AFTER
     Font.'Open Sans'
 
-    Note: dpRecoveryDate is a modern date picker. It already accepts
-    Font.Verdana, so Font.'Open Sans' should also be accepted. If Studio
-    shows an error, leave Font.Verdana and tell me.
-    The Work Date picker (DataCardValue9) and the Reason dropdown
-    (cmbReason) never had Verdana set. They keep their default font and
-    are not part of this change.
+    Why: Open Sans instead of Verdana, to match the label.
 
-K4. Same control (dpRecoveryDate)
+K4. Tree View Path: EditScreen1 > Form > Recovery Date_DataCard2 > dpRecoveryDate
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     640
 
-    DEV NOW
-    Parent.Width - 60
-
     AFTER
     640
+
+    Why: Keeps the original input width.
 
 
 ══════════════════════════════════════════════════════════════════════
@@ -722,18 +732,19 @@ L. Recovery Quantity_DataCard2
 
 L1. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     700
 
-    DEV NOW
-    Parent.Width
-
     AFTER
     700
 
+    Why: Keeps the original card width.
+
 L2. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > DataCardKey13
-    Property: Font   (already done in dev; confirm only)
+    Property: Font
 
     BEFORE
     Font.Verdana
@@ -741,17 +752,20 @@ L2. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > DataCardK
     AFTER
     Font.'Open Sans'
 
+    Why: Open Sans instead of Verdana.
+
 L3. Tree View Path: EditScreen1 > Form > Recovery Quantity_DataCard2 > txtRecoveryQty
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     640
 
-    DEV NOW
-    Parent.Width - 60
-
     AFTER
     640
+
+    Why: Keeps the original input width.
 
 
 ══════════════════════════════════════════════════════════════════════
@@ -760,18 +774,19 @@ M. Comments_DataCard2
 
 M1. Tree View Path: EditScreen1 > Form > Comments_DataCard2
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     700
 
-    DEV NOW
-    Parent.Width
-
     AFTER
     700
 
+    Why: Keeps the original card width.
+
 M2. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > DataCardKey15
-    Property: Font   (already done in dev; confirm only)
+    Property: Font
 
     BEFORE
     Font.Verdana
@@ -779,17 +794,20 @@ M2. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > DataCardKey15
     AFTER
     Font.'Open Sans'
 
+    Why: Open Sans instead of Verdana.
+
 M3. Tree View Path: EditScreen1 > Form > Comments_DataCard2 > inpComments
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     640
 
-    DEV NOW
-    Parent.Width - 60
-
     AFTER
     640
+
+    Why: Keeps the original input width.
 
 
 ══════════════════════════════════════════════════════════════════════
@@ -798,53 +816,54 @@ N. Total Completed_DataCard2
 
 N1. Tree View Path: EditScreen1 > Form > Total Completed_DataCard2
     Property: Width
+    [KEEP ORIGINAL] AFTER is the same as BEFORE. If Studio shows
+    anything else (left over from the earlier attempt), paste AFTER.
 
     BEFORE
     700
 
-    DEV NOW
-    Parent.Width
-
     AFTER
     700
+
+    Why: Keeps the original card width.
 
 
 ══════════════════════════════════════════════════════════════════════
 TESTING IN DEV
 ══════════════════════════════════════════════════════════════════════
-1. Save in dev. Press F5. Expected: the layout matches the production app
-   (or how dev looked before 16 Nov). The yellow header is the same
-   width as the form (700), and nothing is stretched across the window.
-2. Resize the browser window while in F5. Expected: the whole app zooms
-   and keeps its proportions (empty bars may appear at the sides). Fields
-   do not move or reflow.
-3. Check the text. Heading: "iQuery and Mavericks Log" on one line.
-   Labels: "iQueries Completed" and "Mavericks Completed". All labels and
-   the Recovery Date picker use Open Sans (the Work Date picker and Reason
-   dropdown keep their default font). Hover the iQueries input: the
-   tooltip says "iQueries Completed".
+1. Save in dev. Press F5 with the browser maximized. Expected: the
+   background image covers the whole window with no empty bars. The
+   header spans the full width, with the save icon at the right and the
+   heading centered. The form is centered and fills the height below the
+   header, as large as in the original app.
+2. Resize the browser window (narrower, wider, shorter). Expected: the
+   background still covers the window and the form stays centered. On a
+   very narrow window the form zooms down to fit the width, and empty
+   space appears below the fields.
+3. Text: the heading reads "iQuery and Mavericks Log" on one line. The
+   labels read "iQueries Completed" and "Mavericks Completed". All labels
+   and the Recovery Date picker use Open Sans. The Work Date picker and
+   the Reason dropdown keep their default font. Hover the iQueries input:
+   its tooltip reads "iQueries Completed".
 4. Enter a total of 8 or more and press Save. Expected: "Entry submitted
    successfully." and one new row in the dev SharePoint list, with the
    counts in PNQsCompleted and WilbursCompleted.
-5. Enter a total below 8, pick a reason that is not exempt (not Sick,
-   Vacation, Training (Consta), New Employee Training or Project), and
-   leave the recovery fields empty. Expected: the message says "iQueries
-   and Mavericks" and no row is created. Fill both recovery fields and
-   save: the row is created.
-6. Press the reload icon (IconCancel1). Expected: the form resets, as
-   before.
+5. Enter a total below 8, pick a non-exempt reason, and leave the recovery
+   fields empty. Expected: the message mentions "iQueries and Mavericks"
+   and no row is created. Fill both recovery fields and save: the row is
+   created.
+6. The reload icon clears the form. The database and dashboard icons open
+   their links.
 7. Publish to dev, open the dev player link, and repeat steps 1 and 2.
 
 
 ══════════════════════════════════════════════════════════════════════
 ROLLBACK
 ══════════════════════════════════════════════════════════════════════
-Layout: nothing to roll back. Sections A3, B, C, D1, E3-E5, F and every
-Width item already put the original values back.
-Names, message and fonts: paste the BEFORE value of A1, A2, D2, E1, E2,
-G2, H1, H3, I2, I3, J2, K2, K3, L2 and M2. Type A1 and A2 as plain text.
+Paste the BEFORE value of every item, and set Lock aspect ratio back On
+(A3). Type A1 and A2 as plain text.
 
 
 Microsoft references
-Screen size and orientation (Scale to fit): https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/set-aspect-ratio-portrait-landscape
+Screen size and orientation: https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/set-aspect-ratio-portrait-landscape
 App name: https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/set-name-tile
